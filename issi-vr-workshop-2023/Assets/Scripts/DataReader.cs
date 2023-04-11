@@ -6,8 +6,10 @@ using System.Linq;
 
 public class DataReader : MonoBehaviour
 {
+    public static DataReader Instance;
     public List<Node> Nodes { get; set; }
     public List<Edge> Edges { get; set; }
+
     [field: SerializeField] private HashSet<Node> nodesTemp = new HashSet<Node>();
 
     [Header("Files")]
@@ -19,10 +21,17 @@ public class DataReader : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+
         Nodes = new List<Node>();
         Edges = new List<Edge>();
         ReadCSV();
-        ConverttoList();
+        ConvertToList();
         ForNodesGetEntityType();
         ForNodesGetMonthlyActionsAndLatLon();
     }
@@ -37,8 +46,10 @@ public class DataReader : MonoBehaviour
 
                 if (line.Split(',')[0] != "from_name")
                 {
-                    Node newNode = new Node(line.Split(',')[0], new Vector3(float.Parse(line.Split(',')[4]), float.Parse(line.Split(',')[5]), float.Parse(line.Split(',')[6])));
-                    nodesTemp.Add(newNode);
+                    Node newNodeCol1 = new Node(line.Split(',')[0], new Vector3(float.Parse(line.Split(',')[4]), float.Parse(line.Split(',')[5]), float.Parse(line.Split(',')[6])));
+                    Node newNodeCol2 = new Node(line.Split(',')[1], new Vector3(float.Parse(line.Split(',')[7]), float.Parse(line.Split(',')[8]), float.Parse(line.Split(',')[9])));
+                    nodesTemp.Add(newNodeCol1);
+                    nodesTemp.Add(newNodeCol2);
 
                     Edge newEdge = new Edge(line.Split(',')[0], line.Split(',')[1], int.Parse(line.Split(',')[2]), float.Parse(line.Split(',')[3]));
                     Edges.Add(newEdge);
@@ -47,7 +58,7 @@ public class DataReader : MonoBehaviour
         }
     }
 
-    void ConverttoList()
+    void ConvertToList()
     {
         foreach (var item in nodesTemp)
         {
@@ -149,6 +160,7 @@ public class Activity
         this.Latitude = latitude;
         this.Longitude = longitude;
     }
+
 }
 
 [Serializable]
@@ -162,6 +174,7 @@ public struct Node
 {
     [field: SerializeField] public string Id { get; private set; }
     [field: SerializeField] public string EntityType { get; set; }
+
     [field: SerializeField] public Vector3 Position { get; private set; }
     [field: SerializeField] public MonthlyActionWrapper MonthlyActions { get; set; }
     [field: SerializeField] public float Latitude { get; set; }
