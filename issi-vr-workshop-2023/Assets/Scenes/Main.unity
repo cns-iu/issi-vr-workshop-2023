@@ -1707,7 +1707,7 @@ MonoBehaviour:
     type: 3}
   groupColor: {r: 0.12941177, g: 0.5882353, b: 0.9529412, a: 1}
   channelColor: {r: 0.9137255, g: 0.11764706, b: 0.3882353, a: 1}
-  defaultStartWidth: 0.3
+  defaultStartWidth: 0.1
   defaultEndWidth: 0.1
   edgeEndColor: {r: 1, g: 0.34117648, b: 0.13333334, a: 1}
   edgeStartColor: {r: 1, g: 0.92156863, b: 0.23137255, a: 1}
@@ -2092,7 +2092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   edgeList: edgelist_vr_3dcoords_entType_issi
-  activity: 
+  activity: nodelist_issi
 --- !u!1 &1658703942
 GameObject:
   m_ObjectHideFlags: 0

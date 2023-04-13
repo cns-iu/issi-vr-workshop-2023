@@ -40,12 +40,9 @@ public class Visualizer : MonoBehaviour
 
     void Start()
     {
-
         GetLists();
-        CreateNodes();
+        CreateNodeObjects();
         LayOutNodes();
-
-
         GetNodeDefaultPositions();
         CreateEdges();
         ForNodesAndEdgesFillConnectionProperties();
@@ -172,18 +169,13 @@ public class Visualizer : MonoBehaviour
         }
     }
 
-    void CreateNodes()
+    void CreateNodeObjects()
     {
         foreach (var node in nodes)
         {
             GameObject mark = Instantiate(pre_Node);
             NodeData data = mark.AddComponent<NodeData>();
-            data.Id = node.Id;
-            data.EntityType = node.EntityType;
-            data.DefaultPosition = node.Position;
-            data.Activities = node.MonthlyActions;
-            data.Latitude = node.Latitude;
-            data.Longitude = node.Longitude;
+            data.Init(node);
 
             if (node.EntityType == "Group")
             {
