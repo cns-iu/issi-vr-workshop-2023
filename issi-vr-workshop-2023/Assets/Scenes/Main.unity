@@ -563,6 +563,8 @@ GameObject:
   - component: {fileID: 422380171}
   - component: {fileID: 422380174}
   - component: {fileID: 422380173}
+  - component: {fileID: 422380175}
+  - component: {fileID: 422380176}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -645,6 +647,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_System: {fileID: 422380173}
   m_DelayTime: 0
+--- !u!114 &422380175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422380169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 430d8964f0ee2e047a10a813a6a8e9d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _intensity: 0.75
+  _duration: 0.5
+  _volume: {fileID: 1021714064}
+  _provider: {fileID: 422380176}
+--- !u!114 &422380176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422380169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 919e39492806b334982b6b84c90dd927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_System: {fileID: 422380173}
+  m_TurnSpeed: 60
+  m_LeftHandTurnAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Left Hand Turn
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: b9ac2485-f305-451c-9106-d1d25cc235dc
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 1010738217276881514, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
+  m_RightHandTurnAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Right Hand Turn
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: 93119ec4-ae3b-41c0-8fb4-7ff4c5e6f732
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -6493913391331992944, guid: c348712bda248c246b8c49b3db54643f,
+      type: 3}
 --- !u!1 &539433451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,6 +1666,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: XR Device Simulator
       objectReference: {fileID: 0}
+    - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1701,18 +1764,19 @@ MonoBehaviour:
   edgeParent: {fileID: 1374761367}
   offsetNetwork: {x: 0, y: 3.4, z: 5}
   scalingFactor: 0.3
+  edgeScaleFactor: 1
   pre_Node: {fileID: 7028104876401859619, guid: 3c45085a4a4324d42babf62d6ca8fffa,
     type: 3}
   pre_Edge: {fileID: 2871238719833672595, guid: 492e84e8f9101dd4db7b6709a2adc65a,
     type: 3}
   groupColor: {r: 0.12941177, g: 0.5882353, b: 0.9529412, a: 1}
   channelColor: {r: 0.9137255, g: 0.11764706, b: 0.3882353, a: 1}
-  defaultStartWidth: 0.1
+  defaultStartWidth: 0.3
   defaultEndWidth: 0.1
-  edgeEndColor: {r: 1, g: 0.34117648, b: 0.13333334, a: 1}
-  edgeStartColor: {r: 1, g: 0.92156863, b: 0.23137255, a: 1}
-  minNodeSize: 0.3
-  maxNodeSize: 0.3
+  edgeEndColor: {r: 0.8352941, g: 0, b: 0, a: 1}
+  edgeStartColor: {r: 1, g: 0.9754524, b: 0.759434, a: 0.2627451}
+  minNodeSize: 0.1
+  maxNodeSize: 0.1
 --- !u!1 &1229602310
 GameObject:
   m_ObjectHideFlags: 0

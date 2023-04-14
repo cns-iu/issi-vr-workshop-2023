@@ -22,6 +22,7 @@ public class Visualizer : MonoBehaviour
     [field: SerializeField] private Transform edgeParent;
     [field: SerializeField] private Vector3 offsetNetwork = new Vector3(0f, 3.4f, 5f);
     [field: SerializeField] private float scalingFactor = 1f;
+    [field: SerializeField] private float edgeScaleFactor = 3f;
 
     [Header("Prefabs")]
     [field: SerializeField] private GameObject pre_Node;
@@ -87,14 +88,14 @@ public class Visualizer : MonoBehaviour
             LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
 
             //set width
-            lineRenderer.startWidth = defaultStartWidth * currentWeight;
-            lineRenderer.endWidth = defaultEndWidth;
+            lineRenderer.startWidth = defaultStartWidth * currentWeight * edgeScaleFactor;
+            lineRenderer.endWidth = defaultEndWidth * currentWeight * edgeScaleFactor;
 
             //set color
             float alpha = 1.0f;
             Gradient gradient = new Gradient();
             gradient.SetKeys(
-                new GradientColorKey[] { new GradientColorKey(edgeStartColor, 0.0f), new GradientColorKey(edgeEndColor, 1.0f) },
+                new GradientColorKey[] { new GradientColorKey(edgeStartColor, 0.1f), new GradientColorKey(edgeEndColor, 0.5f) },
                 new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
             );
             lineRenderer.colorGradient = gradient;
@@ -126,10 +127,10 @@ public class Visualizer : MonoBehaviour
         edges = DataReader.Instance.Edges;
     }
 
-    float GetMaxWeight(List<Edge> collection)
+    float GetMaxWeight(List<Edge> edges)
     {
         List<float> weights = new List<float>();
-        foreach (var item in collection)
+        foreach (var item in edges)
         {
             weights.Add(item.Weight);
         }
