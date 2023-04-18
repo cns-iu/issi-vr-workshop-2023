@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # Unity layout configs
 *.dwlt
+
+# Keystore
+*.keystore
