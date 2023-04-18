@@ -9,30 +9,24 @@ public class Visualizer : MonoBehaviour
     [Header("Entities")]
     [field: SerializeField] public List<GameObject> EdgeObjects = new List<GameObject>();
     [field: SerializeField] public List<GameObject> NodeObjects = new List<GameObject>();
-    [field: SerializeField] public List<GameObject> CityObjects = new List<GameObject>();
+
     [field: SerializeField] private List<Node> nodes;
     [field: SerializeField] private List<Edge> edges;
-    [field: SerializeField] private List<City> cities;
+
     [field: SerializeField] private List<GameObject> groupSymbols = new List<GameObject>();
     [field: SerializeField] private List<GameObject> channelSymbols = new List<GameObject>();
-    [field: SerializeField] Dictionary<float, List<GameObject>> DictLatNode = new Dictionary<float, List<GameObject>>();
 
 
     [Header("Scene Setup")]
-    [field: SerializeField] private SceneConfiguration sceneConfiguration;
-    [field: SerializeField] private AppState currentState;
-    [field: SerializeField] private GameObject nodeParent;
-    [field: SerializeField] private GameObject edgeParent;
-    [field: SerializeField] private GameObject cityParent;
-    [field: SerializeField] private Vector3 offsetNetwork = new Vector3(-1f, 2f, -3f);
-    [field: SerializeField] private Vector3 offsetGeospatial = new Vector3(-12f, 2f, -50f);
-    [field: SerializeField] private DataReader DataReader;
+    [field: SerializeField] private Transform nodeParent;
+    [field: SerializeField] private Transform edgeParent;
+    [field: SerializeField] private Vector3 offsetNetwork = new Vector3(0f, 3.4f, 5f);
     [field: SerializeField] private float scalingFactor = 1f;
+    [field: SerializeField] private float edgeScaleFactor = 3f;
 
     [Header("Prefabs")]
     [field: SerializeField] private GameObject pre_Node;
     [field: SerializeField] private GameObject pre_Edge;
-    [field: SerializeField] private GameObject pre_City;
 
     [Header("Visual Encoding")]
     [field: SerializeField] private Color groupColor;
@@ -43,26 +37,13 @@ public class Visualizer : MonoBehaviour
     [field: SerializeField] private Color edgeStartColor;
     [field: SerializeField] private float minNodeSize;
     [field: SerializeField] private float maxNodeSize;
-    [field: SerializeField] private float verticalOffsetForNodeStacks = .5f;
 
 
     void Start()
     {
-        SetAppState();
-
         GetLists();
-        CreateNodes();
+        CreateNodeObjects();
         LayOutNodes();
-        if (currentState == AppState.Geospatial)
-        {
-            StackNodes();
-            OffsetNodes(offsetGeospatial);
-        }
-        else
-        {
-            OffsetNodes(offsetNetwork);
-        }
-
         GetNodeDefaultPositions();
         CreateEdges();
         ForNodesAndEdgesFillConnectionProperties();
@@ -70,10 +51,6 @@ public class Visualizer : MonoBehaviour
         SizeNodes();
     }
 
-    void SetAppState()
-    {
-        currentState = sceneConfiguration.GetComponent<SceneConfiguration>().AppState;
-    }
 
     void CreateEdges()
     {
@@ -89,6 +66,8 @@ public class Visualizer : MonoBehaviour
             EdgeObjects.Add(line);
             line.AddComponent<EdgeSetter>();
         }
+
+        Parent(EdgeObjects, edgeParent);
     }
 
     void SetEdgePositionsandWidth()
@@ -109,19 +88,27 @@ public class Visualizer : MonoBehaviour
             LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
 
             //set width
-            lineRenderer.startWidth = defaultStartWidth * currentWeight;
-            lineRenderer.endWidth = defaultEndWidth;
+            lineRenderer.startWidth = defaultStartWidth * currentWeight * edgeScaleFactor;
+            lineRenderer.endWidth = defaultEndWidth * currentWeight * edgeScaleFactor;
 
             //set color
             float alpha = 1.0f;
             Gradient gradient = new Gradient();
             gradient.SetKeys(
-                new GradientColorKey[] { new GradientColorKey(edgeStartColor, 0.0f), new GradientColorKey(edgeEndColor, 1.0f) },
+                new GradientColorKey[] { new GradientColorKey(edgeStartColor, 0.1f), new GradientColorKey(edgeEndColor, 0.5f) },
                 new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
             );
             lineRenderer.colorGradient = gradient;
 
             line.transform.parent = edgeParent.transform;
+        }
+    }
+
+    void Parent(List<GameObject> objects, Transform parent)
+    {
+        for (int i = 0; i < objects.Count; i++)
+        {
+            objects[i].transform.parent = parent;
         }
     }
 
@@ -136,14 +123,14 @@ public class Visualizer : MonoBehaviour
 
     void GetLists()
     {
-        nodes = DataReader.Nodes;
-        edges = DataReader.Edges;
+        nodes = DataReader.Instance.Nodes;
+        edges = DataReader.Instance.Edges;
     }
 
-    float GetMaxWeight(List<Edge> collection)
+    float GetMaxWeight(List<Edge> edges)
     {
         List<float> weights = new List<float>();
-        foreach (var item in collection)
+        foreach (var item in edges)
         {
             weights.Add(item.Weight);
         }
@@ -179,67 +166,17 @@ public class Visualizer : MonoBehaviour
     {
         for (int i = 0; i < NodeObjects.Count; i++)
         {
-            if (currentState == AppState.Network)
-            {
-                NodeObjects[i].transform.position = NodeObjects[i].GetComponent<NodeData>().DefaultPosition * scalingFactor;
-            }
-            else
-            {
-                NodeObjects[i].transform.position = new Vector3(
-                NodeObjects[i].GetComponent<NodeData>().Longitude,
-                0f,
-                NodeObjects[i].GetComponent<NodeData>().Latitude
-                );
-            }
+            NodeObjects[i].transform.position = NodeObjects[i].GetComponent<NodeData>().DefaultPosition * scalingFactor + offsetNetwork;
         }
     }
 
-    void OffsetNodes(Vector3 offset)
-    {
-        edgeParent.transform.Translate(offset);
-        nodeParent.transform.Translate(offset);
-        cityParent.transform.Translate(offset);
-        cityParent.transform.Translate(0f, -.5f, 0f);
-    }
-
-    void StackNodes()
-    {
-        for (int i = 0; i < NodeObjects.Count; i++)
-        {
-            NodeData data = NodeObjects[i].GetComponent<NodeData>();
-
-            if (DictLatNode.ContainsKey(data.Latitude))
-            {
-                DictLatNode[data.Latitude].Add(data.gameObject);
-            }
-            else
-            {
-                DictLatNode.Add(data.Latitude, new List<GameObject> { data.gameObject });
-            }
-        }
-        foreach (var kvp in DictLatNode)
-        {
-            for (int i = 0; i < kvp.Value.Count; i++)
-            {
-                kvp.Value[i].transform.Translate(0f, verticalOffsetForNodeStacks * i, 0f);
-            }
-        }
-    }
-
-    void CreateNodes()
+    void CreateNodeObjects()
     {
         foreach (var node in nodes)
         {
             GameObject mark = Instantiate(pre_Node);
             NodeData data = mark.AddComponent<NodeData>();
-            data.Id = node.Id;
-            data.EntityType = node.EntityType;
-            data.DefaultPosition = node.Position;
-            data.Activities = node.MonthlyActions;
-            data.Latitude = node.Latitude;
-            data.Longitude = node.Longitude;
-
-            mark.transform.parent = nodeParent.transform;
+            data.Init(node);
 
             if (node.EntityType == "Group")
             {
@@ -252,19 +189,11 @@ public class Visualizer : MonoBehaviour
                 channelSymbols.Add(mark);
             }
 
-            //MakeNodeInteractive(mark);
-
             NodeObjects.Add(mark);
 
-
         }
+        Parent(NodeObjects, nodeParent);
     }
-
-    //void MakeNodeInteractive(GameObject node)
-    //{
-    //    node.AddComponent<XRGrabInteractable>();
-    //    node.GetComponent<Rigidbody>().isKinematic = true;
-    //}
 
     void SizeNodes()
     {

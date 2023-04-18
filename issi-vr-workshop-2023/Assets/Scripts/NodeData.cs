@@ -14,7 +14,21 @@ public class NodeData : MonoBehaviour
     public float Z { get; set; }
     public List<GameObject> OutgoingEdges = new List<GameObject>();
     public List<GameObject> IncomingEdges = new List<GameObject>();
-    public MonthlyActionWrapper Activities = new MonthlyActionWrapper();
+    public int activeUsers;
+    public int Messages;
     public float Latitude;
     public float Longitude;
+    public string Location;
+
+    public void Init(Node node)
+    {
+        this.Id = node.Id;
+        this.EntityType = node.EntityType;
+        this.DefaultPosition = node.Position;
+        this.activeUsers = node.ActiveUsers;
+        this.Latitude = node.Latitude;
+        this.Longitude = node.Longitude;
+        this.Location = node.Location;
+        this.Messages = node.Messages;
+    }
 }

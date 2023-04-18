@@ -1,0 +1,47 @@
+node,Type,active_users,Location,lon,lat,n_msg
+qd334info,Channel,,Strausberg,13.8833952,52.5814009,655
+qd8341info,Channel,,Kaufbeuren,10.622246,47.8803788,81
+querdenken_083,Channel,,Kempten,10.3168835,47.7267063,480
+querdenken_211,Channel,,Düsseldorf,6.7763137,51.2254018,4959
+querdenken_234,Channel,,Bochum,7.2196635,51.4818111,2651
+querdenken_341,Channel,,Leipzig,12.3747329,51.3406321,4825
+querdenken_351,Channel,,Dresden,13.7381437,51.0493286,4579
+querdenken_381,Channel,,Rostock,12.1286127,54.0924445,1604
+querdenken_441,Channel,,Oldenburg,8.2146017,53.1389753,1318
+querdenken_571,Channel,,Minden,8.9168852,52.2881045,383
+querdenken_6051,Channel,,Gelnhausen,9.190486,50.2028622,677
+querdenken_615,Channel,,Darmstadt,8.651177,49.872775,2839
+querdenken_631,Channel,,Kaiserslautern,7.7689951,49.4432174,138
+querdenken_69,Channel,,Frankfurt,8.6820917,50.1106444,1429
+querdenken_911,Channel,,Nürnberg,11.077298,49.453872,3558
+querdenken_brandenburg,Channel,,Potsdam,13.0591397,52.4009309,439
+querdenken421,Channel,,Bremen,8.8071646,53.0758196,1650
+querdenken511,Channel,,Hannover,9.7385532,52.3744779,2176
+querdenken611_infokanal,Channel,,Wiesbaden,8.2416556,50.0820384,2541
+querdenken911_termine,Channel,,Nürnberg,11.077298,49.453872,894
+QuerdenkerChat,Group,3777,,,,66096
+QuerdenkerZwickau,Group,1099,Zwickau,12.4939267,50.7185043,29879
+querdenken_30info,Channel,,Berlin,13.3888599,52.5170365,45
+8341,Group,265,Kaufbeuren,10.622246,47.8803788,8120
+83,Group,491,Allgäu,11.6243293,47.7852787,4321
+querdenken_magazin,Channel,,,,,73
+234,Group,843,Bochum,7.2196635,51.4818111,39616
+6051,Group,558,Gelnhausen,9.190486,50.2028622,18204
+querdenken_201,Channel,,Essen,7.0158171,51.4582235,317
+querdenken_nrw,Channel,,Düsseldorf,6.7763137,51.2254018,27
+querdenkerforum,Channel,,,,,4071
+711,Group,4948,Stuttgart,9.1800132,48.7784485,16906
+381,Group,1096,Rostock,12.1286127,54.0924445,48419
+30,Group,2067,,,,47713
+441,Group,1072,Oldenburg,8.2146017,53.1389753,33647
+571,Group,568,Minden,8.9168852,52.2881045,14323
+611,Group,857,Wiesbaden,8.2416556,50.0820384,41538
+615,Group,500,Darmstadt,8.651177,49.872775,11340
+querdenken_7551,Channel,,Überlingen Bodensee,9.188838292,47.7417763,499
+631,Group,779,Kaiserslautern,7.7689951,49.4432174,13048
+querdenken_8441,Channel,,Pfaffenhofen an der Ilm,11.5084954,48.5296743,142
+421,Group,188,Bremen,8.8071646,53.0758196,9521
+querdenken511demoterminekanal,Channel,,Hannover,9.7385532,52.3744779,156
+69,Group,2412,Frankfurt am Main,8.6820917,50.1106444,69101
+911,Group,1517,Nürnberg,11.077298,49.453872,53758
+361,Group,1133,Erfurt,11.02988,50.984768,33552
