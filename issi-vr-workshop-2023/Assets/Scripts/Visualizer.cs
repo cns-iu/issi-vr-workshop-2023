@@ -52,6 +52,7 @@ public class Visualizer : MonoBehaviour
         ForNodesAndEdgesFillConnectionProperties();
         SetEdgePositionsandWidth();
         SizeNodes();
+        RotateNodeParent();
     }
 
 
@@ -204,6 +205,11 @@ public class Visualizer : MonoBehaviour
 
         }
         Parent(NodeObjects, nodeParent);
+    }
+
+    private void RotateNodeParent()
+    {
+        nodeParent.Rotate(new Vector3 (0, 90, 0));
     }
 
     void SizeNodes()

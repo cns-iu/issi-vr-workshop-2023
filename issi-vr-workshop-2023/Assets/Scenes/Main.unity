@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 0}
+  m_Sun: {fileID: 1844935431}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -16826,7 +16826,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120223411}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16835,7 +16835,7 @@ Transform:
   - {fileID: 295271828}
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &1125589606
 GameObject:
   m_ObjectHideFlags: 0
@@ -16932,7 +16932,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174693778}
   m_LocalRotation: {x: 0.118085094, y: 0.6665331, z: -0.72808003, w: 0.10811591}
-  m_LocalPosition: {x: -1.94, y: 2.246, z: -0.303}
+  m_LocalPosition: {x: -1.932, y: 2.543, z: -0.328}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18068,7 +18068,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1773876589}
   m_LocalRotation: {x: 0.118085094, y: 0.6665331, z: -0.72808003, w: 0.10811591}
-  m_LocalPosition: {x: -1.31, y: 2.308, z: 0.652}
+  m_LocalPosition: {x: -1.306, y: 2.453, z: 0.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19048,14 +19048,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1844935428}
-  m_LocalRotation: {x: 0.08326306, y: 0.80178297, z: -0.11504651, w: 0.58049613}
+  m_LocalRotation: {x: 0.10477106, y: 0.6681084, z: -0.095872104, w: 0.7303854}
   m_LocalPosition: {x: -5.7745934, y: 3.084334, z: 0.14759177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1182843923}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 16.329, y: 108.19, z: -0.003}
+  m_LocalEulerAnglesHint: {x: 16.329, y: 84.9, z: -0.003}
 --- !u!114 &1844935430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19091,7 +19091,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.4039216, g: 0.5058824, b: 0.6431373, a: 1}
-  m_Intensity: 1
+  m_Intensity: 3.64
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
