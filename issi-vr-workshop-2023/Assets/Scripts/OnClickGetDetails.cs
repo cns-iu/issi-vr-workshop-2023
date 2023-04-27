@@ -7,17 +7,27 @@ using TMPro;
 
 public class OnClickGetDetails : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _detailText;
+    [SerializeField] private TMP_Text _prompt;
+    [SerializeField] private TMP_Text _idText;
+    [SerializeField] private TMP_Text _messagesText;
     private XRRayInteractor _controller;
-    
+
     private void Awake()
     {
         _controller = GetComponent<XRRayInteractor>();
         _controller.selectEntered.AddListener(
+
+
+
             (SelectEnterEventArgs args) =>
             {
-                string id = args.interactableObject.transform.gameObject.GetComponent<NodeData>().Id;
-                _detailText.text = id;
+                _prompt.enabled = false;
+
+                NodeData data = args.interactableObject.transform.gameObject.GetComponent<NodeData>();
+                string id = data.id;
+                int numMessages = data.messages;
+                _idText.text = $"Node ID: {id}";
+                _messagesText.text = $"Messages: {numMessages}";
             }
             );
     }

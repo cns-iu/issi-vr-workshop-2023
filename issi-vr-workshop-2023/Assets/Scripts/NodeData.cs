@@ -6,29 +6,29 @@ using UnityEngine.InputSystem;
 
 public class NodeData : MonoBehaviour
 {
-    public string Id;
-    public string EntityType;
-    public Vector3 DefaultPosition;
+    public string id;
+    public string entityType;
+    public Vector3 defaultPosition;
     public float X { get; set; }
     public float Y { get; set; }
     public float Z { get; set; }
     public List<GameObject> OutgoingEdges = new List<GameObject>();
     public List<GameObject> IncomingEdges = new List<GameObject>();
     public int activeUsers;
-    public int Messages;
-    public float Latitude;
-    public float Longitude;
-    public string Location;
+    public int messages;
+    public float latitude;
+    public float longitude;
+    public string location;
 
     public void Init(Node node)
     {
-        this.Id = node.Id;
-        this.EntityType = node.EntityType;
-        this.DefaultPosition = node.Position;
+        this.id = node.Id;
+        this.entityType = node.EntityType;
+        this.defaultPosition = node.Position;
         this.activeUsers = node.ActiveUsers;
-        this.Latitude = node.Latitude;
-        this.Longitude = node.Longitude;
-        this.Location = node.Location;
-        this.Messages = node.Messages;
+        this.latitude = node.Latitude;
+        this.longitude = node.Longitude;
+        this.location = node.Location;
+        this.messages = node.Messages;
     }
 }
