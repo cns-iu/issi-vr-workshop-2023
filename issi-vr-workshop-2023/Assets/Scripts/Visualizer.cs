@@ -31,8 +31,11 @@ public class Visualizer : MonoBehaviour
     [Header("Visual Encoding")]
     [field: SerializeField] private Color groupColor;
     [field: SerializeField] private Color channelColor;
-    [field: SerializeField] private float defaultStartWidth;
-    [field: SerializeField] private float defaultEndWidth;
+    [field: SerializeField] private float _maxStartWidth;
+    [field: SerializeField] private float _maxEndWidth;
+    [field: SerializeField] private float _minStartWidth;
+    [field: SerializeField] private float _minEndWidth;
+    [SerializeField] private float _maxWeight;
     [field: SerializeField] private Color edgeEndColor;
     [field: SerializeField] private Color edgeStartColor;
     [field: SerializeField] private float minNodeSize;
@@ -49,6 +52,7 @@ public class Visualizer : MonoBehaviour
         ForNodesAndEdgesFillConnectionProperties();
         SetEdgePositionsandWidth();
         SizeNodes();
+        RotateNodeParent();
     }
 
 
@@ -72,6 +76,7 @@ public class Visualizer : MonoBehaviour
 
     void SetEdgePositionsandWidth()
     {
+        _maxWeight = GetMaxWeight(edges);
         for (int i = 0; i < EdgeObjects.Count; i++)
         {
             GameObject line = EdgeObjects[i];
@@ -83,19 +88,26 @@ public class Visualizer : MonoBehaviour
                 }
             );
 
-            float maxWeight = GetMaxWeight(edges);
-            float currentWeight = data.Weight / maxWeight;
+            float startWidth = data.Weight.Remap(
+                0f, _maxWeight, _minStartWidth, _maxStartWidth
+                );
+            float endWidth = data.Weight.Remap(
+                0f, _maxWeight, _minEndWidth, _maxEndWidth
+                );
+
             LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
 
             //set width
-            lineRenderer.startWidth = defaultStartWidth * currentWeight * edgeScaleFactor;
-            lineRenderer.endWidth = defaultEndWidth * currentWeight * edgeScaleFactor;
+            lineRenderer.startWidth = startWidth * edgeScaleFactor;
+            lineRenderer.endWidth = endWidth * edgeScaleFactor;
 
             //set color
-            float alpha = 1.0f;
+            float alpha = data.Weight.Remap(
+                0f, _maxWeight, .3f, 1f
+                );
             Gradient gradient = new Gradient();
             gradient.SetKeys(
-                new GradientColorKey[] { new GradientColorKey(edgeStartColor, 0.1f), new GradientColorKey(edgeEndColor, 0.5f) },
+                new GradientColorKey[] { new GradientColorKey(edgeStartColor, 0.0f), new GradientColorKey(edgeEndColor, 0.2f) },
                 new GradientAlphaKey[] { new GradientAlphaKey(alpha, 0.0f), new GradientAlphaKey(alpha, 1.0f) }
             );
             lineRenderer.colorGradient = gradient;
@@ -117,7 +129,7 @@ public class Visualizer : MonoBehaviour
         for (int i = 0; i < NodeObjects.Count; i++)
         {
             NodeData data = NodeObjects[i].GetComponent<NodeData>();
-            data.DefaultPosition = NodeObjects[i].transform.position;
+            data.defaultPosition = NodeObjects[i].transform.position;
         }
     }
 
@@ -147,13 +159,13 @@ public class Visualizer : MonoBehaviour
             {
                 EdgeData e = EdgeObjects[k].GetComponent<EdgeData>();
 
-                if (e.Source == n.Id)
+                if (e.Source == n.id)
                 {
                     n.OutgoingEdges.Add(e.gameObject);
                     e.SourceNode = n.gameObject;
                 }
 
-                if (e.Target == n.Id)
+                if (e.Target == n.id)
                 {
                     n.IncomingEdges.Add(e.gameObject);
                     e.TargetNode = n.gameObject;
@@ -166,7 +178,7 @@ public class Visualizer : MonoBehaviour
     {
         for (int i = 0; i < NodeObjects.Count; i++)
         {
-            NodeObjects[i].transform.position = NodeObjects[i].GetComponent<NodeData>().DefaultPosition * scalingFactor + offsetNetwork;
+            NodeObjects[i].transform.position = NodeObjects[i].GetComponent<NodeData>().defaultPosition * scalingFactor + offsetNetwork;
         }
     }
 
@@ -195,21 +207,26 @@ public class Visualizer : MonoBehaviour
         Parent(NodeObjects, nodeParent);
     }
 
+    private void RotateNodeParent()
+    {
+        nodeParent.Rotate(new Vector3 (0, 90, 0));
+    }
+
     void SizeNodes()
     {
-        List<float> degrees = new List<float>();
-        foreach (var item in NodeObjects)
+        List<float> messages = new List<float>();
+        foreach (var n in NodeObjects)
         {
-            degrees.Add(item.GetComponent<NodeData>().IncomingEdges.Count + item.GetComponent<NodeData>().OutgoingEdges.Count);
+            messages.Add(n.GetComponent<NodeData>().messages);
         }
-        float max = Mathf.Max(degrees.ToArray());
+        float max = Mathf.Max(messages.ToArray());
 
-        foreach (var item in NodeObjects)
+        foreach (var n in NodeObjects)
         {
-            item.gameObject.transform.localScale = new Vector3(
-                Mathf.Lerp(minNodeSize, maxNodeSize, item.GetComponent<NodeData>().IncomingEdges.Count / max),
-                Mathf.Lerp(minNodeSize, maxNodeSize, item.GetComponent<NodeData>().IncomingEdges.Count / max),
-                Mathf.Lerp(minNodeSize, maxNodeSize, item.GetComponent<NodeData>().IncomingEdges.Count / max)
+            n.gameObject.transform.localScale = new Vector3(
+                Mathf.Lerp(minNodeSize, maxNodeSize, n.GetComponent<NodeData>().messages / max),
+                Mathf.Lerp(minNodeSize, maxNodeSize, n.GetComponent<NodeData>().messages / max),
+                Mathf.Lerp(minNodeSize, maxNodeSize, n.GetComponent<NodeData>().messages / max)
             );
         }
     }
