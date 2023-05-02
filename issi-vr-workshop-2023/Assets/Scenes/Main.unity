@@ -17834,6 +17834,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 655686293}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &964040470
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 964040471}
+  m_Layer: 0
+  m_Name: NodeParentNetworkGeo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &964040471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964040470}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 974611471}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &974611470
 GameObject:
   m_ObjectHideFlags: 0
@@ -17864,6 +17895,8 @@ Transform:
   m_Children:
   - {fileID: 1286586741}
   - {fileID: 1374761367}
+  - {fileID: 964040471}
+  - {fileID: 1476957774}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18537,14 +18570,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5265150509d2249a6eaf97b99ef651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EdgeObjects: []
-  NodeObjects: []
+  EdgeObjectsNetwork: []
+  NodeObjectsNetwork: []
+  EdgeObjectsGeospatial: []
+  NodeObjectsGeospatial: []
   nodes: []
   edges: []
   groupSymbols: []
   channelSymbols: []
-  nodeParent: {fileID: 1286586741}
-  edgeParent: {fileID: 1374761367}
+  nodeParentNetwork: {fileID: 1286586741}
+  edgeParentNetwork: {fileID: 1374761367}
+  nodeParentGeo: {fileID: 964040471}
+  edgeParentGeo: {fileID: 1476957774}
   offsetNetwork: {x: 0, y: 1.75, z: 4.5}
   scalingFactor: 0.19
   edgeScaleFactor: 1
@@ -19012,7 +19049,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1286586741}
   m_Layer: 0
-  m_Name: NodeParent
+  m_Name: NodeParentNetwork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19192,7 +19229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1374761367}
   m_Layer: 0
-  m_Name: EdgeParent
+  m_Name: EdgeParentNetwork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19745,6 +19782,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edgeList: edgelist_vr_3dcoords_entType_issi
   activity: nodelist_issi
+--- !u!1 &1476957773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1476957774}
+  m_Layer: 0
+  m_Name: EdgeParentNetwork Geo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1476957774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476957773}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 974611471}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1480320639
 GameObject:
   m_ObjectHideFlags: 0
