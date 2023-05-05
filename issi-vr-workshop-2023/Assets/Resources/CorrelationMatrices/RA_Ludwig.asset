@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d73f6bce5ddd2c4190fc9e0dbd48403, type: 3}
+  m_Name: RA_Ludwig
+  m_EditorClassIdentifier: 
+  id: RA_Ludwig
+  rows:
+  - id: 211
+    corValue: 0.98922503
+    isFloat: 1
+  - id: 234
+    corValue: 0.9916171
+    isFloat: 1
+  - id: 421
+    corValue: 0.97757685
+    isFloat: 1
+  - id: 681
+    corValue: 0.9930648
+    isFloat: 1
+  - id: 711
+    corValue: 0.9059883
+    isFloat: 1
+  - id: 721
+    corValue: 0.9850426
+    isFloat: 1
+  - id: 8341
+    corValue: 0.98960537
+    isFloat: 1
+  - id: 911
+    corValue: 0.9880533
+    isFloat: 1
+  - id: QUERDENKEN714Marbach
+    corValue: 0.96814084
+    isFloat: 1
+  - id: QUERDENKEN_30
+    corValue: 0.81604344
+    isFloat: 1
+  - id: QUERDENKEN_5221
+    corValue: 0.8606081
+    isFloat: 1
+  - id: QUERDENKEN_5231
+    corValue: 0.46836296
+    isFloat: 1
+  - id: QUERDENKEN_621
+    corValue: 0.97937167
+    isFloat: 1
+  - id: QUERDENKEN_711
+    corValue: 0.9853504
+    isFloat: 1
+  - id: QUERDENKEN_7171
+    corValue: 0.9780927
+    isFloat: 1
+  - id: QUERDENKEN_721
+    corValue: 0.9513357
+    isFloat: 1
+  - id: QUERDENKEN_722
+    corValue: 0.9783628
+    isFloat: 1
+  - id: QUERDENKEN_743
+    corValue: 0.84857213
+    isFloat: 1
+  - id: QUERDENKEN_762
+    corValue: 0.8143056
+    isFloat: 1
+  - id: QUERDENKEN_791
+    corValue: 0.9606578
+    isFloat: 1
+  - id: QUERDENKEN_794
+    corValue: 0.8895255
+    isFloat: 1
+  - id: QUERDENKEN_8331
+    corValue: 0.8363709
+    isFloat: 1
+  - id: QUERDENKEN_881
+    corValue: 0.9803205
+    isFloat: 1
+  - id: Querdenken089Demo
+    corValue: 0.9346916
+    isFloat: 1
+  - id: Querdenken381Rostock
+    corValue: 0.9666446
+    isFloat: 1
+  - id: Querdenken_713_info
+    corValue: 0.885766
+    isFloat: 1
+  - id: Querdenken_Brandenburg_Chat
+    corValue: 0.98441
+    isFloat: 1
+  - id: QuerdenkerChat
+    corValue: 0.95723873
+    isFloat: 1
+  - id: QuerdenkerZwickau
+    corValue: 0.9348763
+    isFloat: 1
+  - id: QuerdenkerZwickauNeuigkeitenWelt
+    corValue: 0.95195407
+    isFloat: 1
+  - id: RA_Ludwig
+    corValue: 1
+    isFloat: 1
+  - id: qd334info
+    corValue: 0.99420077
+    isFloat: 1
+  - id: querdenken421
+    corValue: 0.9570672
+    isFloat: 1
+  - id: querdenken491
+    corValue: 0.91030455
+    isFloat: 1
+  - id: querdenken511
+    corValue: 0.9480998
+    isFloat: 1
+  - id: querdenken511demoterminekanal
+    corValue: 0.55830145
+    isFloat: 1
+  - id: querdenken611_infokanal
+    corValue: 0.90216845
+    isFloat: 1
+  - id: querdenken911_termine
+    corValue: 0.89056814
+    isFloat: 1
+  - id: querdenken_211
+    corValue: 0.9786716
+    isFloat: 1
+  - id: querdenken_234
+    corValue: 0.9105234
+    isFloat: 1
+  - id: querdenken_2932
+    corValue: 0.8657372
+    isFloat: 1
+  - id: querdenken_341
+    corValue: 0.9488087
+    isFloat: 1
+  - id: querdenken_351
+    corValue: 0.8902043
+    isFloat: 1
+  - id: querdenken_441
+    corValue: 0.8220586
+    isFloat: 1
+  - id: querdenken_571
+    corValue: 0.87103575
+    isFloat: 1
+  - id: querdenken_6051
+    corValue: 0.9709203
+    isFloat: 1
+  - id: querdenken_615
+    corValue: 0.9153607
+    isFloat: 1
+  - id: querdenken_681
+    corValue: 0.76347935
+    isFloat: 1
+  - id: querdenken_69
+    corValue: 0.8575747
+    isFloat: 1
+  - id: querdenken_793
+    corValue: 0.9551495
+    isFloat: 1
+  - id: querdenken_911
+    corValue: 0.97576857
+    isFloat: 1
+  - id: querdenken_brandenburg
+    corValue: 0.9923645
+    isFloat: 1
+  - id: querdenken_bremen
+    corValue: 0.98386616
+    isFloat: 1
+  - id: querdenkenhameln
+    corValue: 0.98302794
+    isFloat: 1
+  - id: querdenker6
+    corValue: 0.9641092
+    isFloat: 1
+  - id: wahrheitstalk
+    corValue: 0.9862338
+    isFloat: 1

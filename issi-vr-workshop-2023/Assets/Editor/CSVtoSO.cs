@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System;
 
 public class CSVtoSO : MonoBehaviour
 {
-    private static string root = "Assets/Editor/CSVs";
+    private static string root = "Assets/Editor";
 
     [MenuItem("Utilities/IngestCorrelationMatrices")]
     public static void GetCorrelationMatrices()
@@ -23,40 +24,33 @@ public class CSVtoSO : MonoBehaviour
 
             foreach (var h in colHeaders)
             {
-                if (h == "HANDLE") continue;
+                if (h == "") continue;
                 nodeIds.Add(h);
             }
 
-            foreach (var line in allLines)
+            for (int i = 1; i < allLines.Length; i++)
             {
-                string[] splitData = line.Split(',');
-                if (splitData[0] == "HANDLE") continue;
-
-
-                string node = splitData[0];
+                string[] splitLine = allLines[i].Split(',');
+                string id = splitLine[0];
 
 
                 CorrelationMatrix matrix = ScriptableObject.CreateInstance<CorrelationMatrix>();
-                matrix.id = node;
+                matrix.id = id;
 
-                for (int i = 0; i < nodeIds.Count; i++)
+                for (int j = 0; j < nodeIds.Count; j++)
                 {
-                    bool isFloat = float.TryParse(splitData[i + 1], out float value);
+                    bool isFloat = float.TryParse(splitLine[j + 1], out float value);
 
-                    matrix.rows.Add(new MatrixCell(nodeIds[i], value, isFloat));
+                    matrix.rows.Add(new MatrixCell(nodeIds[j], value, isFloat));
 
                 }
 
-
-
-
-                AssetDatabase.CreateAsset(matrix, $"Assets/Resources/CorrelationMatrices/{folder}/{node}.asset");
+                AssetDatabase.CreateAsset(matrix, $"Assets/ResourcesCorrelationMatrices/{id}.asset");
 
             }
 
+            AssetDatabase.SaveAssets();
+
         }
-
-        AssetDatabase.SaveAssets();
-
     }
 }

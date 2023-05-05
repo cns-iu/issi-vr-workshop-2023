@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d73f6bce5ddd2c4190fc9e0dbd48403, type: 3}
+  m_Name: QUERDENKEN_721
+  m_EditorClassIdentifier: 
+  id: QUERDENKEN_721
+  rows:
+  - id: 211
+    corValue: 0.9569316
+    isFloat: 1
+  - id: 234
+    corValue: 0.9661414
+    isFloat: 1
+  - id: 421
+    corValue: 0.9352341
+    isFloat: 1
+  - id: 681
+    corValue: 0.966671
+    isFloat: 1
+  - id: 711
+    corValue: 0.8146696
+    isFloat: 1
+  - id: 721
+    corValue: 0.9376833
+    isFloat: 1
+  - id: 8341
+    corValue: 0.95154655
+    isFloat: 1
+  - id: 911
+    corValue: 0.9254789
+    isFloat: 1
+  - id: QUERDENKEN714Marbach
+    corValue: 0.8679031
+    isFloat: 1
+  - id: QUERDENKEN_30
+    corValue: 0.9074829
+    isFloat: 1
+  - id: QUERDENKEN_5221
+    corValue: 0.79839724
+    isFloat: 1
+  - id: QUERDENKEN_5231
+    corValue: 0.42672706
+    isFloat: 1
+  - id: QUERDENKEN_621
+    corValue: 0.9053179
+    isFloat: 1
+  - id: QUERDENKEN_711
+    corValue: 0.9339824
+    isFloat: 1
+  - id: QUERDENKEN_7171
+    corValue: 0.91919875
+    isFloat: 1
+  - id: QUERDENKEN_721
+    corValue: 1
+    isFloat: 1
+  - id: QUERDENKEN_722
+    corValue: 0.92148805
+    isFloat: 1
+  - id: QUERDENKEN_743
+    corValue: 0.8939838
+    isFloat: 1
+  - id: QUERDENKEN_762
+    corValue: 0.7808847
+    isFloat: 1
+  - id: QUERDENKEN_791
+    corValue: 0.879494
+    isFloat: 1
+  - id: QUERDENKEN_794
+    corValue: 0.82998335
+    isFloat: 1
+  - id: QUERDENKEN_8331
+    corValue: 0.6713382
+    isFloat: 1
+  - id: QUERDENKEN_881
+    corValue: 0.9191258
+    isFloat: 1
+  - id: Querdenken089Demo
+    corValue: 0.858181
+    isFloat: 1
+  - id: Querdenken381Rostock
+    corValue: 0.9041224
+    isFloat: 1
+  - id: Querdenken_713_info
+    corValue: 0.7697756
+    isFloat: 1
+  - id: Querdenken_Brandenburg_Chat
+    corValue: 0.9242694
+    isFloat: 1
+  - id: QuerdenkerChat
+    corValue: 0.9049242
+    isFloat: 1
+  - id: QuerdenkerZwickau
+    corValue: 0.8267576
+    isFloat: 1
+  - id: QuerdenkerZwickauNeuigkeitenWelt
+    corValue: 0.88722587
+    isFloat: 1
+  - id: RA_Ludwig
+    corValue: 0.9513357
+    isFloat: 1
+  - id: qd334info
+    corValue: 0.941362
+    isFloat: 1
+  - id: querdenken421
+    corValue: 0.8738812
+    isFloat: 1
+  - id: querdenken491
+    corValue: 0.7510193
+    isFloat: 1
+  - id: querdenken511
+    corValue: 0.8731579
+    isFloat: 1
+  - id: querdenken511demoterminekanal
+    corValue: 0.4125093
+    isFloat: 1
+  - id: querdenken611_infokanal
+    corValue: 0.82148856
+    isFloat: 1
+  - id: querdenken911_termine
+    corValue: 0.80126786
+    isFloat: 1
+  - id: querdenken_211
+    corValue: 0.9097193
+    isFloat: 1
+  - id: querdenken_234
+    corValue: 0.9630056
+    isFloat: 1
+  - id: querdenken_2932
+    corValue: 0.9421534
+    isFloat: 1
+  - id: querdenken_341
+    corValue: 0.89614475
+    isFloat: 1
+  - id: querdenken_351
+    corValue: 0.8315045
+    isFloat: 1
+  - id: querdenken_441
+    corValue: 0.6448242
+    isFloat: 1
+  - id: querdenken_571
+    corValue: 0.7863194
+    isFloat: 1
+  - id: querdenken_6051
+    corValue: 0.9366507
+    isFloat: 1
+  - id: querdenken_615
+    corValue: 0.89911604
+    isFloat: 1
+  - id: querdenken_681
+    corValue: 0.70072436
+    isFloat: 1
+  - id: querdenken_69
+    corValue: 0.8943266
+    isFloat: 1
+  - id: querdenken_793
+    corValue: 0.8795544
+    isFloat: 1
+  - id: querdenken_911
+    corValue: 0.8984631
+    isFloat: 1
+  - id: querdenken_brandenburg
+    corValue: 0.9293573
+    isFloat: 1
+  - id: querdenken_bremen
+    corValue: 0.92283416
+    isFloat: 1
+  - id: querdenkenhameln
+    corValue: 0.9349745
+    isFloat: 1
+  - id: querdenker6
+    corValue: 0.9374354
+    isFloat: 1
+  - id: wahrheitstalk
+    corValue: 0.9091354
+    isFloat: 1

@@ -14,10 +14,11 @@ public class CorrelationVisualizer : MonoBehaviour
     [SerializeField] private XRRayInteractor _interactor;
 
     [Header("Data")]
+    [SerializeField] private Visualizer _visualizer;
     [SerializeField] private string _timestep;
     [SerializeField] private CorrelationMatrix _matrix;
     [SerializeField] private NodeData _data;
-    [SerializeField] private List<NodeData> _nodes = new List<NodeData>();
+    //[SerializeField] private List<GameObject> _nodes = new List<NodeData>();
 
     [Header("Colors")]
     [SerializeField] private Color _lowCorrelation;
@@ -38,37 +39,34 @@ public class CorrelationVisualizer : MonoBehaviour
     private void GetCorrelationsForSelected(SelectEnterEventArgs args)
     {
         _data = args.interactableObject.transform.gameObject.GetComponent<NodeData>();
-        _matrix = Resources.Load<CorrelationMatrix>($"CorrelationMatrices/{_timestep}/{_data.id}");
+        _matrix = Resources.Load<CorrelationMatrix>($"CorrelationMatrices/{_data.id}");
         Debug.Log(_matrix.id);
         ColorNodes(_matrix, _data);
     }
-
+ 
     private void ColorNodes(CorrelationMatrix matrix, NodeData data)
     {
-
-       
-
-        for (int i = 0; i < _nodes.Count; i++)
+        for (int i = 0; i < Visualizer.Instance.NodeObjectsGeospatial.Count; i++)
         {
+            //NodeData otherData = Visualizer.Instance.NodeObjectsGeospatial[i].GetComponent<NodeData>();
             for (int k = 0; k < matrix.rows.Count; k++)
             {
-                if (matrix.rows[k].id == _nodes[i].id)
+                if (matrix.rows[k].id == Visualizer.Instance.NodeObjectsGeospatial[i].GetComponent<NodeData>().id)
                 {
-                    MeshRenderer renderer = _nodes[i].GetComponent<MeshRenderer>();
+                    MeshRenderer renderer = Visualizer.Instance.NodeObjectsGeospatial[i].GetComponent<MeshRenderer>();
                     float saturation = matrix.rows[k].corValue;
                     Debug.Log($"{data.id} has corValue {saturation} with {matrix.rows[k].id}");
                     //renderer.material.color = new Color(0f, 0f, saturation);
                     renderer.material.color = Color.Lerp(_lowCorrelation, _highCorrelation, saturation);
+                    Debug.Log(renderer.material.color);
                 }
             }
         }
-
-       
-
     }
 
-    private void Awake()
+    private void Start()
     {
+        
         //_interactor = GetComponent<XRRayInteractor>();
 
 

@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d73f6bce5ddd2c4190fc9e0dbd48403, type: 3}
+  m_Name: 721
+  m_EditorClassIdentifier: 
+  id: 721
+  rows:
+  - id: 211
+    corValue: 0.9918808
+    isFloat: 1
+  - id: 234
+    corValue: 0.9817849
+    isFloat: 1
+  - id: 421
+    corValue: 0.99767685
+    isFloat: 1
+  - id: 681
+    corValue: 0.9821934
+    isFloat: 1
+  - id: 711
+    corValue: 0.85410583
+    isFloat: 1
+  - id: 721
+    corValue: 1
+    isFloat: 1
+  - id: 8341
+    corValue: 0.97424555
+    isFloat: 1
+  - id: 911
+    corValue: 0.98078156
+    isFloat: 1
+  - id: QUERDENKEN714Marbach
+    corValue: 0.95536923
+    isFloat: 1
+  - id: QUERDENKEN_30
+    corValue: 0.85475516
+    isFloat: 1
+  - id: QUERDENKEN_5221
+    corValue: 0.8014615
+    isFloat: 1
+  - id: QUERDENKEN_5231
+    corValue: 0.33416238
+    isFloat: 1
+  - id: QUERDENKEN_621
+    corValue: 0.9518502
+    isFloat: 1
+  - id: QUERDENKEN_711
+    corValue: 0.97646344
+    isFloat: 1
+  - id: QUERDENKEN_7171
+    corValue: 0.93918866
+    isFloat: 1
+  - id: QUERDENKEN_721
+    corValue: 0.9376833
+    isFloat: 1
+  - id: QUERDENKEN_722
+    corValue: 0.9370211
+    isFloat: 1
+  - id: QUERDENKEN_743
+    corValue: 0.8009578
+    isFloat: 1
+  - id: QUERDENKEN_762
+    corValue: 0.71415436
+    isFloat: 1
+  - id: QUERDENKEN_791
+    corValue: 0.97804636
+    isFloat: 1
+  - id: QUERDENKEN_794
+    corValue: 0.9257263
+    isFloat: 1
+  - id: QUERDENKEN_8331
+    corValue: 0.8547469
+    isFloat: 1
+  - id: QUERDENKEN_881
+    corValue: 0.9744828
+    isFloat: 1
+  - id: Querdenken089Demo
+    corValue: 0.9731015
+    isFloat: 1
+  - id: Querdenken381Rostock
+    corValue: 0.9291744
+    isFloat: 1
+  - id: Querdenken_713_info
+    corValue: 0.9287266
+    isFloat: 1
+  - id: Querdenken_Brandenburg_Chat
+    corValue: 0.98288155
+    isFloat: 1
+  - id: QuerdenkerChat
+    corValue: 0.93943036
+    isFloat: 1
+  - id: QuerdenkerZwickau
+    corValue: 0.97003263
+    isFloat: 1
+  - id: QuerdenkerZwickauNeuigkeitenWelt
+    corValue: 0.9252765
+    isFloat: 1
+  - id: RA_Ludwig
+    corValue: 0.9850426
+    isFloat: 1
+  - id: qd334info
+    corValue: 0.98632604
+    isFloat: 1
+  - id: querdenken421
+    corValue: 0.98289675
+    isFloat: 1
+  - id: querdenken491
+    corValue: 0.9164813
+    isFloat: 1
+  - id: querdenken511
+    corValue: 0.93881017
+    isFloat: 1
+  - id: querdenken511demoterminekanal
+    corValue: 0.5249708
+    isFloat: 1
+  - id: querdenken611_infokanal
+    corValue: 0.9556247
+    isFloat: 1
+  - id: querdenken911_termine
+    corValue: 0.9445955
+    isFloat: 1
+  - id: querdenken_211
+    corValue: 0.9869278
+    isFloat: 1
+  - id: querdenken_234
+    corValue: 0.9415149
+    isFloat: 1
+  - id: querdenken_2932
+    corValue: 0.863977
+    isFloat: 1
+  - id: querdenken_341
+    corValue: 0.9174991
+    isFloat: 1
+  - id: querdenken_351
+    corValue: 0.8024314
+    isFloat: 1
+  - id: querdenken_441
+    corValue: 0.86975867
+    isFloat: 1
+  - id: querdenken_571
+    corValue: 0.9265194
+    isFloat: 1
+  - id: querdenken_6051
+    corValue: 0.92567086
+    isFloat: 1
+  - id: querdenken_615
+    corValue: 0.9642458
+    isFloat: 1
+  - id: querdenken_681
+    corValue: 0.6728856
+    isFloat: 1
+  - id: querdenken_69
+    corValue: 0.918597
+    isFloat: 1
+  - id: querdenken_793
+    corValue: 0.9094964
+    isFloat: 1
+  - id: querdenken_911
+    corValue: 0.93879217
+    isFloat: 1
+  - id: querdenken_brandenburg
+    corValue: 0.9905354
+    isFloat: 1
+  - id: querdenken_bremen
+    corValue: 0.95494336
+    isFloat: 1
+  - id: querdenkenhameln
+    corValue: 0.9873729
+    isFloat: 1
+  - id: querdenker6
+    corValue: 0.90717256
+    isFloat: 1
+  - id: wahrheitstalk
+    corValue: 0.96966255
+    isFloat: 1
