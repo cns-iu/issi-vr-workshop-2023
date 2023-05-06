@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.XR.Interaction.Toolkit;
 using Unity.VisualScripting;
+using System;
+using UnityEngine.UI;
 
 public enum Layout { Network, Geospatial };
 
@@ -37,6 +39,8 @@ public class Visualizer : MonoBehaviour
     [field: SerializeField] private List<GameObject> groupSymbols = new List<GameObject>();
     [field: SerializeField] private List<GameObject> channelSymbols = new List<GameObject>();
 
+    private Dictionary<float, List<GameObject>> DictLatNode = new Dictionary<float, List<GameObject>>();
+
     [Header("Scene Setup")]
     [field: SerializeField] private Transform nodeParentNetwork;
     [field: SerializeField] private Transform edgeParentNetwork;
@@ -50,19 +54,22 @@ public class Visualizer : MonoBehaviour
     [SerializeField] private float maxLat;
     [SerializeField] private float minLon;
     [SerializeField] private float maxLon;
+    [SerializeField] private float _geoOffset = .15f;
+    [field: SerializeField] public Button ResetButton { get; private set; }
 
     [Header("Prefabs")]
     [field: SerializeField] private GameObject pre_Node;
     [field: SerializeField] private GameObject pre_Edge;
 
     [Header("Visual Encoding")]
-    [field: SerializeField] private Color groupColor;
-    [field: SerializeField] private Color channelColor;
+
     [field: SerializeField] private float _maxStartWidth;
     [field: SerializeField] private float _maxEndWidth;
     [field: SerializeField] private float _minStartWidth;
     [field: SerializeField] private float _minEndWidth;
     [SerializeField] private float _maxWeight;
+    [field: SerializeField] public Color GroupColor { get; private set; }
+    [field: SerializeField] public Color ChannelColor { get; private set; }
     [field: SerializeField] private Color edgeEndColor;
     [field: SerializeField] private Color edgeStartColor;
     [field: SerializeField] private float minNodeSize;
@@ -80,8 +87,8 @@ public class Visualizer : MonoBehaviour
         LayOutNodes(Layout.Geospatial, NodeObjectsGeospatial);
         GetNodeDefaultPositions();
 
-        EdgeObjectsNetwork = CreateEdges();
-        EdgeObjectsGeospatial = CreateEdges();
+        EdgeObjectsNetwork = CreateEdges(Layout.Network);
+        EdgeObjectsGeospatial = CreateEdges(Layout.Geospatial);
 
         ForNodesAndEdgesFillConnectionProperties(NodeObjectsNetwork, EdgeObjectsNetwork);
         ForNodesAndEdgesFillConnectionProperties(NodeObjectsGeospatial, EdgeObjectsGeospatial);
@@ -95,7 +102,7 @@ public class Visualizer : MonoBehaviour
         RotateNodeParent();
     }
 
-    List<GameObject> CreateEdges()
+    List<GameObject> CreateEdges(Layout layout)
     {
         List<GameObject> result = new List<GameObject>();
         foreach (var edge in edges)
@@ -110,7 +117,19 @@ public class Visualizer : MonoBehaviour
             result.Add(line);
             line.AddComponent<EdgeSetter>();
         }
-        Parent(result, edgeParentNetwork);
+
+        switch (layout)
+        {
+            case Layout.Network:
+                Parent(result, edgeParentNetwork);
+                break;
+            case Layout.Geospatial:
+                Parent(result, edgeParentGeo);
+                break;
+            default:
+                break;
+        }
+
         return result;
 
     }
@@ -225,26 +244,44 @@ public class Visualizer : MonoBehaviour
                     objects[i].transform.position = objects[i].GetComponent<NodeData>().defaultPosition * scalingFactor + offsetNetwork;
                 }
                 break;
+
             case Layout.Geospatial:
                 for (int i = 0; i < objects.Count; i++)
                 {
-                    //objects[i].transform.position =
-                    //    new Vector3(
-                    //        objects[i].GetComponent<NodeData>().latitude,
-                    //        0f,
-                    //        objects[i].GetComponent<NodeData>().longitude
-                    //        ) * .1f;
-
                     objects[i].transform.position = GetCorrectedLatLonForWorld(
                         objects[i].GetComponent<NodeData>().latitude,
                         objects[i].GetComponent<NodeData>().longitude
                         );
                 }
+                StackNodes(NodeObjectsGeospatial);
                 break;
             default:
                 break;
         }
+    }
 
+    void StackNodes(List<GameObject> nodes)
+    {
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            NodeData data = nodes[i].GetComponent<NodeData>();
+
+            if (DictLatNode.ContainsKey(data.latitude))
+            {
+                DictLatNode[data.latitude].Add(data.gameObject);
+            }
+            else
+            {
+                DictLatNode.Add(data.latitude, new List<GameObject> { data.gameObject });
+            }
+        }
+        foreach (var kvp in DictLatNode)
+        {
+            for (int i = 0; i < kvp.Value.Count; i++)
+            {
+                kvp.Value[i].transform.Translate(0f, _geoOffset * i, 0f);
+            }
+        }
     }
 
     Vector3 GetCorrectedLatLonForWorld(float originalLat, float originalLon)
@@ -280,17 +317,18 @@ public class Visualizer : MonoBehaviour
         foreach (var node in nodes)
         {
             GameObject mark = Instantiate(pre_Node);
-            NodeData data = mark.AddComponent<NodeData>();
-            data.Init(node);
+            NodeData data = mark.GetComponent<NodeData>();
+            //mark.AddComponent<HighlightCorrespondingNode>();
+            data.Init(node, layout);
 
             if (node.EntityType == "Group")
             {
-                mark.GetComponent<Renderer>().material.color = groupColor;
+                mark.GetComponent<Renderer>().material.color = GroupColor;
                 groupSymbols.Add(mark);
             }
             else
             {
-                mark.GetComponent<Renderer>().material.color = channelColor;
+                mark.GetComponent<Renderer>().material.color = ChannelColor;
                 channelSymbols.Add(mark);
             }
 
@@ -304,6 +342,7 @@ public class Visualizer : MonoBehaviour
                 Parent(result, nodeParentNetwork);
                 break;
             case Layout.Geospatial:
+                Parent(result, nodeParentGeo);
                 break;
             default:
                 break;
@@ -327,10 +366,7 @@ public class Visualizer : MonoBehaviour
                 if (n.GetComponent<NodeData>().latitude != 0) continue;
 
             }
-
             messages.Add(n.GetComponent<NodeData>().messages);
-
-
         }
         float max = Mathf.Max(messages.ToArray());
 

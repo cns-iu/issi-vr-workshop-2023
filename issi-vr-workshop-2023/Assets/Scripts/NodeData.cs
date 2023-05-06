@@ -19,8 +19,9 @@ public class NodeData : MonoBehaviour
     public float latitude;
     public float longitude;
     public string location;
+    public Layout layout;
 
-    public void Init(Node node)
+    public void Init(Node node, Layout layout)
     {
         this.id = node.Id;
         this.entityType = node.EntityType;
@@ -30,5 +31,6 @@ public class NodeData : MonoBehaviour
         this.longitude = node.Longitude;
         this.location = node.Location;
         this.messages = node.Messages;
+        this.layout = layout;
     }
 }

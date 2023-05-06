@@ -55,10 +55,8 @@ public class CorrelationVisualizer : MonoBehaviour
                 {
                     MeshRenderer renderer = Visualizer.Instance.NodeObjectsGeospatial[i].GetComponent<MeshRenderer>();
                     float saturation = matrix.rows[k].corValue;
-                    Debug.Log($"{data.id} has corValue {saturation} with {matrix.rows[k].id}");
-                    //renderer.material.color = new Color(0f, 0f, saturation);
+                    //Debug.Log($"{data.id} has corValue {saturation} with {matrix.rows[k].id}");
                     renderer.material.color = Color.Lerp(_lowCorrelation, _highCorrelation, saturation);
-                    Debug.Log(renderer.material.color);
                 }
             }
         }
