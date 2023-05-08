@@ -40,7 +40,6 @@ public class CorrelationVisualizer : MonoBehaviour
     {
         _data = args.interactableObject.transform.gameObject.GetComponent<NodeData>();
         _matrix = Resources.Load<CorrelationMatrix>($"CorrelationMatrices/{_data.id}");
-        Debug.Log(_matrix.id);
         ColorNodes(_matrix, _data);
     }
  

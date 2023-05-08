@@ -45,7 +45,7 @@ public class CSVtoSO : MonoBehaviour
 
                 }
 
-                AssetDatabase.CreateAsset(matrix, $"Assets/ResourcesCorrelationMatrices/{id}.asset");
+                AssetDatabase.CreateAsset(matrix, $"Assets/Resources/CorrelationMatrices/{id}.asset");
 
             }
 
