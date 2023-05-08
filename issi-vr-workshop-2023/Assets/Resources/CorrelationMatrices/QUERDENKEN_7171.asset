@@ -182,3 +182,6 @@ MonoBehaviour:
   - id: wahrheitstalk
     corValue: 0.9562435
     isFloat: 1
+  - id: querdenken_30info
+    corValue: 0.84163964
+    isFloat: 1
