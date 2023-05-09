@@ -42,19 +42,17 @@ public class CorrelationVisualizer : MonoBehaviour
         _matrix = Resources.Load<CorrelationMatrix>($"CorrelationMatrices/{_data.id}");
         ColorNodes(_matrix, _data);
     }
- 
+
     private void ColorNodes(CorrelationMatrix matrix, NodeData data)
     {
         for (int i = 0; i < Visualizer.Instance.NodeObjectsGeospatial.Count; i++)
         {
-            //NodeData otherData = Visualizer.Instance.NodeObjectsGeospatial[i].GetComponent<NodeData>();
             for (int k = 0; k < matrix.rows.Count; k++)
             {
                 if (matrix.rows[k].id == Visualizer.Instance.NodeObjectsGeospatial[i].GetComponent<NodeData>().id)
                 {
                     MeshRenderer renderer = Visualizer.Instance.NodeObjectsGeospatial[i].GetComponent<MeshRenderer>();
                     float saturation = matrix.rows[k].corValue;
-                    //Debug.Log($"{data.id} has corValue {saturation} with {matrix.rows[k].id}");
                     renderer.material.color = Color.Lerp(_lowCorrelation, _highCorrelation, saturation);
                 }
             }
@@ -63,7 +61,7 @@ public class CorrelationVisualizer : MonoBehaviour
 
     private void Start()
     {
-        
+
         //_interactor = GetComponent<XRRayInteractor>();
 
 
