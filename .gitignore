@@ -76,3 +76,7 @@ crashlytics-build.properties
 
 # Keystore
 *.keystore
+
+# Assets from Unity Store
+Medieval Farm Tools
+Farm Pack
