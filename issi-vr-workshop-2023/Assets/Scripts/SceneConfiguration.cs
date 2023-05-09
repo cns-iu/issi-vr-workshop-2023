@@ -44,7 +44,7 @@ public class SceneConfiguration : MonoBehaviour
 
     private void Start()
     {
-        edgeObjects = visualizer.EdgeObjects;
+        edgeObjects = visualizer.EdgeObjectsNetwork;
     }
 
     public void FilterByTimeStep(float start, float end)

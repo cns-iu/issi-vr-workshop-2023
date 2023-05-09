@@ -3,12 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.XR.Interaction.Toolkit;
+using Unity.VisualScripting;
+using System;
+using UnityEngine.UI;
+
+public enum Layout { Network, Geospatial };
 
 public class Visualizer : MonoBehaviour
 {
+    public static Visualizer Instance { get; private set; }
+
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
+
     [Header("Entities")]
-    [field: SerializeField] public List<GameObject> EdgeObjects = new List<GameObject>();
-    [field: SerializeField] public List<GameObject> NodeObjects = new List<GameObject>();
+    [field: SerializeField] public List<GameObject> EdgeObjectsNetwork = new List<GameObject>();
+    [field: SerializeField] public List<GameObject> NodeObjectsNetwork = new List<GameObject>();
+    [field: SerializeField] public List<GameObject> EdgeObjectsGeospatial = new List<GameObject>();
+    [field: SerializeField] public List<GameObject> NodeObjectsGeospatial = new List<GameObject>();
 
     [field: SerializeField] private List<Node> nodes;
     [field: SerializeField] private List<Edge> edges;
@@ -16,26 +39,37 @@ public class Visualizer : MonoBehaviour
     [field: SerializeField] private List<GameObject> groupSymbols = new List<GameObject>();
     [field: SerializeField] private List<GameObject> channelSymbols = new List<GameObject>();
 
+    private Dictionary<float, List<GameObject>> DictLatNode = new Dictionary<float, List<GameObject>>();
 
     [Header("Scene Setup")]
-    [field: SerializeField] private Transform nodeParent;
-    [field: SerializeField] private Transform edgeParent;
+    [field: SerializeField] private Transform nodeParentNetwork;
+    [field: SerializeField] private Transform edgeParentNetwork;
+    [field: SerializeField] private Transform nodeParentGeo;
+    [field: SerializeField] private Transform edgeParentGeo;
     [field: SerializeField] private Vector3 offsetNetwork = new Vector3(0f, 3.4f, 5f);
     [field: SerializeField] private float scalingFactor = 1f;
     [field: SerializeField] private float edgeScaleFactor = 3f;
+    [SerializeField] private List<GameObject> _corners = new List<GameObject>();
+    [SerializeField] private float minLat;
+    [SerializeField] private float maxLat;
+    [SerializeField] private float minLon;
+    [SerializeField] private float maxLon;
+    [SerializeField] private float _geoOffset = .15f;
+    [field: SerializeField] public Button ResetButton { get; private set; }
 
     [Header("Prefabs")]
     [field: SerializeField] private GameObject pre_Node;
     [field: SerializeField] private GameObject pre_Edge;
 
     [Header("Visual Encoding")]
-    [field: SerializeField] private Color groupColor;
-    [field: SerializeField] private Color channelColor;
+
     [field: SerializeField] private float _maxStartWidth;
     [field: SerializeField] private float _maxEndWidth;
     [field: SerializeField] private float _minStartWidth;
     [field: SerializeField] private float _minEndWidth;
     [SerializeField] private float _maxWeight;
+    [field: SerializeField] public Color GroupColor { get; private set; }
+    [field: SerializeField] public Color ChannelColor { get; private set; }
     [field: SerializeField] private Color edgeEndColor;
     [field: SerializeField] private Color edgeStartColor;
     [field: SerializeField] private float minNodeSize;
@@ -45,19 +79,32 @@ public class Visualizer : MonoBehaviour
     void Start()
     {
         GetLists();
-        CreateNodeObjects();
-        LayOutNodes();
+
+        NodeObjectsNetwork = CreateNodeObjects(Layout.Network);
+        NodeObjectsGeospatial = CreateNodeObjects(Layout.Geospatial);
+
+        LayOutNodes(Layout.Network, NodeObjectsNetwork);
+        LayOutNodes(Layout.Geospatial, NodeObjectsGeospatial);
         GetNodeDefaultPositions();
-        CreateEdges();
-        ForNodesAndEdgesFillConnectionProperties();
-        SetEdgePositionsandWidth();
-        SizeNodes();
+
+        EdgeObjectsNetwork = CreateEdges(Layout.Network);
+        EdgeObjectsGeospatial = CreateEdges(Layout.Geospatial);
+
+        ForNodesAndEdgesFillConnectionProperties(NodeObjectsNetwork, EdgeObjectsNetwork);
+        ForNodesAndEdgesFillConnectionProperties(NodeObjectsGeospatial, EdgeObjectsGeospatial);
+
+        SetEdgePositionsandWidth(EdgeObjectsNetwork);
+        SetEdgePositionsandWidth(EdgeObjectsGeospatial);
+
+        SizeNodes(NodeObjectsNetwork, Layout.Network);
+        SizeNodes(NodeObjectsGeospatial, Layout.Geospatial);
+
         RotateNodeParent();
     }
 
-
-    void CreateEdges()
+    List<GameObject> CreateEdges(Layout layout)
     {
+        List<GameObject> result = new List<GameObject>();
         foreach (var edge in edges)
         {
             GameObject line = Instantiate(pre_Edge);
@@ -67,21 +114,34 @@ public class Visualizer : MonoBehaviour
             data.Weight = edge.Weight;
             data.TimeStep = edge.TimeStep;
 
-            EdgeObjects.Add(line);
+            result.Add(line);
             line.AddComponent<EdgeSetter>();
         }
 
-        Parent(EdgeObjects, edgeParent);
+        switch (layout)
+        {
+            case Layout.Network:
+                Parent(result, edgeParentNetwork);
+                break;
+            case Layout.Geospatial:
+                Parent(result, edgeParentGeo);
+                break;
+            default:
+                break;
+        }
+
+        return result;
+
     }
 
-    void SetEdgePositionsandWidth()
+    void SetEdgePositionsandWidth(List<GameObject> e)
     {
         _maxWeight = GetMaxWeight(edges);
-        for (int i = 0; i < EdgeObjects.Count; i++)
+        for (int i = 0; i < e.Count; i++)
         {
-            GameObject line = EdgeObjects[i];
+            GameObject line = e[i];
             EdgeData data = line.GetComponent<EdgeData>();
-            EdgeObjects[i].GetComponent<LineRenderer>().SetPositions(
+            e[i].GetComponent<LineRenderer>().SetPositions(
                 new Vector3[2]{
                 data.SourceNode.transform.position,
                 data.TargetNode.transform.position
@@ -112,7 +172,7 @@ public class Visualizer : MonoBehaviour
             );
             lineRenderer.colorGradient = gradient;
 
-            line.transform.parent = edgeParent.transform;
+            line.transform.parent = edgeParentNetwork.transform;
         }
     }
 
@@ -126,10 +186,10 @@ public class Visualizer : MonoBehaviour
 
     void GetNodeDefaultPositions()
     {
-        for (int i = 0; i < NodeObjects.Count; i++)
+        for (int i = 0; i < NodeObjectsNetwork.Count; i++)
         {
-            NodeData data = NodeObjects[i].GetComponent<NodeData>();
-            data.defaultPosition = NodeObjects[i].transform.position;
+            NodeData data = NodeObjectsNetwork[i].GetComponent<NodeData>();
+            data.defaultPosition = NodeObjectsNetwork[i].transform.position;
         }
     }
 
@@ -150,14 +210,14 @@ public class Visualizer : MonoBehaviour
         return Mathf.Max(weights.ToArray());
     }
 
-    void ForNodesAndEdgesFillConnectionProperties()
+    void ForNodesAndEdgesFillConnectionProperties(List<GameObject> nodes, List<GameObject> edges)
     {
-        for (int i = 0; i < NodeObjects.Count; i++)
+        for (int i = 0; i < nodes.Count; i++)
         {
-            NodeData n = NodeObjects[i].GetComponent<NodeData>();
-            for (int k = 0; k < EdgeObjects.Count; k++)
+            NodeData n = nodes[i].GetComponent<NodeData>();
+            for (int k = 0; k < edges.Count; k++)
             {
-                EdgeData e = EdgeObjects[k].GetComponent<EdgeData>();
+                EdgeData e = edges[k].GetComponent<EdgeData>();
 
                 if (e.Source == n.id)
                 {
@@ -174,54 +234,143 @@ public class Visualizer : MonoBehaviour
         }
     }
 
-    void LayOutNodes()
+    void LayOutNodes(Layout layout, List<GameObject> objects)
     {
-        for (int i = 0; i < NodeObjects.Count; i++)
+        switch (layout)
         {
-            NodeObjects[i].transform.position = NodeObjects[i].GetComponent<NodeData>().defaultPosition * scalingFactor + offsetNetwork;
+            case Layout.Network:
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    objects[i].transform.position = objects[i].GetComponent<NodeData>().defaultPosition * scalingFactor + offsetNetwork;
+                }
+                break;
+
+            case Layout.Geospatial:
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    objects[i].transform.position = GetCorrectedLatLonForWorld(
+                        objects[i].GetComponent<NodeData>().latitude,
+                        objects[i].GetComponent<NodeData>().longitude
+                        );
+                }
+                StackNodes(NodeObjectsGeospatial);
+                break;
+            default:
+                break;
         }
     }
 
-    void CreateNodeObjects()
+    void StackNodes(List<GameObject> nodes)
     {
+        for (int i = 0; i < nodes.Count; i++)
+        {
+            NodeData data = nodes[i].GetComponent<NodeData>();
+
+            if (DictLatNode.ContainsKey(data.latitude))
+            {
+                DictLatNode[data.latitude].Add(data.gameObject);
+            }
+            else
+            {
+                DictLatNode.Add(data.latitude, new List<GameObject> { data.gameObject });
+            }
+        }
+        foreach (var kvp in DictLatNode)
+        {
+            for (int i = 0; i < kvp.Value.Count; i++)
+            {
+                kvp.Value[i].transform.Translate(0f, _geoOffset * i, 0f);
+            }
+        }
+    }
+
+    Vector3 GetCorrectedLatLonForWorld(float originalLat, float originalLon)
+    {
+        if (originalLat == 0) return _corners[4].transform.position;
+
+        float maxDiffLat = maxLat - minLat;
+        float maxDiffLon = maxLon - minLon;
+
+        Vector3 corrected = new Vector3(
+            Mathf.Lerp(
+            _corners[2].transform.position.x,
+            _corners[3].transform.position.x,
+             (originalLon - minLon) / maxDiffLon
+
+            ),
+
+            _corners[0].transform.position.y,
+
+            Mathf.Lerp(
+            _corners[0].transform.position.z,
+            _corners[1].transform.position.z,
+           (originalLat - minLat) / maxDiffLat
+
+            )
+        );
+        return corrected;
+    }
+
+    List<GameObject> CreateNodeObjects(Layout layout)
+    {
+        List<GameObject> result = new List<GameObject>();
         foreach (var node in nodes)
         {
             GameObject mark = Instantiate(pre_Node);
-            NodeData data = mark.AddComponent<NodeData>();
-            data.Init(node);
+            NodeData data = mark.GetComponent<NodeData>();
+            //mark.AddComponent<HighlightCorrespondingNode>();
+            data.Init(node, layout);
 
             if (node.EntityType == "Group")
             {
-                mark.GetComponent<Renderer>().material.color = groupColor;
+                mark.GetComponent<Renderer>().material.color = GroupColor;
                 groupSymbols.Add(mark);
             }
             else
             {
-                mark.GetComponent<Renderer>().material.color = channelColor;
+                mark.GetComponent<Renderer>().material.color = ChannelColor;
                 channelSymbols.Add(mark);
             }
 
-            NodeObjects.Add(mark);
+            result.Add(mark);
 
         }
-        Parent(NodeObjects, nodeParent);
+
+        switch (layout)
+        {
+            case Layout.Network:
+                Parent(result, nodeParentNetwork);
+                break;
+            case Layout.Geospatial:
+                Parent(result, nodeParentGeo);
+                break;
+            default:
+                break;
+        }
+
+        return result;
     }
 
     private void RotateNodeParent()
     {
-        nodeParent.Rotate(new Vector3 (0, 90, 0));
+        nodeParentNetwork.Rotate(new Vector3(0, 90, 0));
     }
 
-    void SizeNodes()
+    void SizeNodes(List<GameObject> nodes, Layout layout)
     {
         List<float> messages = new List<float>();
-        foreach (var n in NodeObjects)
+        foreach (var n in nodes)
         {
+            if (layout == Layout.Geospatial)
+            {
+                if (n.GetComponent<NodeData>().latitude != 0) continue;
+
+            }
             messages.Add(n.GetComponent<NodeData>().messages);
         }
         float max = Mathf.Max(messages.ToArray());
 
-        foreach (var n in NodeObjects)
+        foreach (var n in nodes)
         {
             n.gameObject.transform.localScale = new Vector3(
                 Mathf.Lerp(minNodeSize, maxNodeSize, n.GetComponent<NodeData>().messages / max),

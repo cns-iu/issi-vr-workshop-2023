@@ -79,18 +79,18 @@ public class DataReader : MonoBehaviour
                         nameToEntityTypeMapping.Add(id, type);
                     };
 
-                    int.TryParse(line.Split(',')[2], out activeUsers);
-                    location = line.Split(',')[3];
+                    //int.TryParse(line.Split(',')[2], out activeUsers);
+                    location = line.Split(',')[2];
                     float.TryParse(line.Split(',')[4], out lat);
-                    float.TryParse(line.Split(',')[5], out lon);
-                    int.TryParse(line.Split(',')[6], out messages);
+                    float.TryParse(line.Split(',')[3], out lon);
+                    int.TryParse(line.Split(',')[5], out messages);
                 }
                 for (int i = 0; i < Nodes.Count; i++)
                 {
                     Node n = Nodes[i];
                     if (n.Id == id)
                     {
-                        n.EntityType = type; n.ActiveUsers = activeUsers; n.Latitude = lat; n.Longitude = lon; n.Messages = messages; n.Location = location;
+                        n.EntityType = type;  n.Latitude = lat; n.Longitude = lon; n.Messages = messages; n.Location = location;
                     }
                     Nodes[i] = n;
                 }

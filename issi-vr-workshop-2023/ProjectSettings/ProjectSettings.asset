@@ -154,7 +154,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.UnityTechnologies.com.unity.template.urpblank
+    Android: com.AndreasBueckle.ISSIVRWorkshop2023
     Standalone: com.AndreasBueckle.issi-vr-workshop-2023
     iPhone: com.Unity-Technologies.com.unity.template.urp-blank
   buildNumber:
