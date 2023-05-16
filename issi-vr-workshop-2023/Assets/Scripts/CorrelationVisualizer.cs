@@ -16,7 +16,7 @@ public class CorrelationVisualizer : MonoBehaviour
     [Header("Data")]
     [SerializeField] private Visualizer _visualizer;
     [SerializeField] private string _timestep;
-    [SerializeField] private CorrelationMatrix _matrix;
+    [SerializeField] private SimilarityMatrix _matrix;
     [SerializeField] private NodeData _data;
     //[SerializeField] private List<GameObject> _nodes = new List<NodeData>();
 
@@ -28,7 +28,7 @@ public class CorrelationVisualizer : MonoBehaviour
 
     private void OnEnable()
     {
-        _interactor.selectEntered.AddListener(GetCorrelationsForSelected);
+        _interactor.selectEntered.AddListener(GetSimilaritiesForSelected);
 
         ////example for subscribing with lambda
         //_interactor.selectEntered.AddListener((SelectEnterEventArgs args) => { });
@@ -36,14 +36,14 @@ public class CorrelationVisualizer : MonoBehaviour
         //_interactor.selectEntered.AddListener(_selectEnter);
     }
 
-    private void GetCorrelationsForSelected(SelectEnterEventArgs args)
+    private void GetSimilaritiesForSelected(SelectEnterEventArgs args)
     {
         _data = args.interactableObject.transform.gameObject.GetComponent<NodeData>();
-        _matrix = Resources.Load<CorrelationMatrix>($"CorrelationMatrices/{_data.id}");
+        _matrix = Resources.Load<SimilarityMatrix>($"SimilarityMatrices/{_data.id}");
         ColorNodes(_matrix, _data);
     }
 
-    private void ColorNodes(CorrelationMatrix matrix, NodeData data)
+    private void ColorNodes(SimilarityMatrix matrix, NodeData data)
     {
         for (int i = 0; i < Visualizer.Instance.NodeObjectsGeospatial.Count; i++)
         {
@@ -52,7 +52,7 @@ public class CorrelationVisualizer : MonoBehaviour
                 if (matrix.rows[k].id == Visualizer.Instance.NodeObjectsGeospatial[i].GetComponent<NodeData>().id)
                 {
                     MeshRenderer renderer = Visualizer.Instance.NodeObjectsGeospatial[i].GetComponent<MeshRenderer>();
-                    float saturation = matrix.rows[k].corValue;
+                    float saturation = matrix.rows[k].simValue;
                     renderer.material.color = Color.Lerp(_lowCorrelation, _highCorrelation, saturation);
                 }
             }
