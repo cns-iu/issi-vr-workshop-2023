@@ -6,7 +6,7 @@ To prepare for the workshop, please download the following software:
 - <a href="https://unity.com/download" target="_blank">Unity Hub</a> with <a href="https://unity.com/releases/editor/whats-new/2022.3.0" target="_blank">Unity 2022.3.0 (LTS)</a> (see detailed instructions for installation below)
 - <a href="https://visualstudio.microsoft.com/vs/community/" target="_blank">Visual Studio Community</a>
 - <a href="https://www.oculus.com/Setup/" target="_blank">Oculus Desktop (Windows only, we will use a workaround for Mac users)</a>
-- Finally, you can either clone this repository or download it as a ZIP file, put it into your Documents folder (or any location of your choosing). 
+- Finally, you can either clone this repository or download it as a ZIP file and put it into your Documents folder (or any location of your choosing). 
 
 # Installation
 - Once you have downloaded <a href="https://unity.com/download" target="_blank">Unity Hub</a>, please install Unity 2022.3.0 (LTS). You can do so by navigation to the Installs tab, then click the Install Editor button in the top right.
