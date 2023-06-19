@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: -1943981635312742281}
   - component: {fileID: 6651408970793479925}
   - component: {fileID: 8211540750725778357}
-  - component: {fileID: -6645929537691708538}
   - component: {fileID: 8281515479030075264}
+  - component: {fileID: -7242532719447310967}
   m_Layer: 7
   m_Name: Node
   m_TagString: Untagged
@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9bfba98798697b44b942a742a78c72d2, type: 2}
+  - {fileID: 2100000, guid: bd4d772b1052ae44eb2bd895dc322c3c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -159,6 +159,13 @@ MonoBehaviour:
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
+  m_AllowGazeInteraction: 0
+  m_AllowGazeSelect: 0
+  m_OverrideGazeTimeToSelect: 0
+  m_GazeTimeToSelect: 0.5
+  m_OverrideTimeToAutoDeselectGaze: 0
+  m_TimeToAutoDeselectGaze: 3
+  m_AllowGazeAssistance: 0
   m_FirstHoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -191,6 +198,7 @@ MonoBehaviour:
       m_Calls: []
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
+  m_StartingInteractionStrengthFilters: []
   m_OnFirstHoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -231,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.8352941, g: 0, b: 0, a: 1}
+  outlineColor: {r: 0.54509807, g: 0.7647059, b: 0.2901961, a: 1}
   outlineWidth: 8.66
   precomputeOutline: 1
   bakeKeys:
@@ -753,7 +761,7 @@ MonoBehaviour:
     - {x: -0.6959634, y: 0.1768332, z: -0.6959634}
     - {x: -0.34139428, y: 0.6646524, z: -0.66459554}
     - {x: -0.17685792, y: 0.6958694, z: -0.6960511}
---- !u!114 &-6645929537691708538
+--- !u!114 &8281515479030075264
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -762,7 +770,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7028104876401859619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fcd870dedc000d40878af08eeb45519, type: 3}
+  m_Script: {fileID: 11500000, guid: c85ce38aabdf70344a13f099f8e6a17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 
@@ -776,7 +784,7 @@ MonoBehaviour:
   longitude: 0
   location: 
   layout: 0
---- !u!114 &8281515479030075264
+--- !u!114 &-7242532719447310967
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -785,6 +793,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7028104876401859619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd49ca1afd0950c4e9f3b957d6a079e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2cdb41f15e8e16f47a56f00f3eea525e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

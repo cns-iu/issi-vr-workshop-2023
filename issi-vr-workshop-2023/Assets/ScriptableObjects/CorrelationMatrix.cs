@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine;
 
-public class CorrelationMatrix : ScriptableObject
+public class SimilarityMatrix : ScriptableObject
 {
     public string id;
     [field: SerializeField] public List<MatrixCell> rows = new List<MatrixCell>();
@@ -14,7 +14,7 @@ public class CorrelationMatrix : ScriptableObject
 public class MatrixCell
 {
     public string id;
-    public float corValue;
+    public float simValue;
     public bool isFloat = true;
 
     public MatrixCell(string n, float v, bool isFloat)
@@ -22,7 +22,7 @@ public class MatrixCell
         id = n;
         this.isFloat = isFloat;
 
-        corValue = !isFloat ? float.NaN : v;
+        simValue = !isFloat ? float.NaN : v;
     }
 
 
