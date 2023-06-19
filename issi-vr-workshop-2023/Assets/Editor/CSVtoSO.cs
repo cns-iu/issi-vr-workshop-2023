@@ -34,7 +34,7 @@ public class CSVtoSO : MonoBehaviour
                 string id = splitLine[0];
 
 
-                CorrelationMatrix matrix = ScriptableObject.CreateInstance<CorrelationMatrix>();
+                SimilarityMatrix matrix = ScriptableObject.CreateInstance<SimilarityMatrix>();
                 matrix.id = id;
 
                 for (int j = 0; j < nodeIds.Count; j++)
@@ -45,7 +45,7 @@ public class CSVtoSO : MonoBehaviour
 
                 }
 
-                AssetDatabase.CreateAsset(matrix, $"Assets/Resources/CorrelationMatrices/{id}.asset");
+                AssetDatabase.CreateAsset(matrix, $"Assets/Resources/SimilarityMatrices/{id}.asset");
 
             }
 

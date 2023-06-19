@@ -1,0 +1,187 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d73f6bce5ddd2c4190fc9e0dbd48403, type: 3}
+  m_Name: QuerdenkerZwickau
+  m_EditorClassIdentifier: 
+  id: QuerdenkerZwickau
+  rows:
+  - id: 211
+    simValue: 0.9475229
+    isFloat: 1
+  - id: 234
+    simValue: 0.92471844
+    isFloat: 1
+  - id: 421
+    simValue: 0.96658486
+    isFloat: 1
+  - id: 681
+    simValue: 0.9234661
+    isFloat: 1
+  - id: 711
+    simValue: 0.80536145
+    isFloat: 1
+  - id: 721
+    simValue: 0.97003263
+    isFloat: 1
+  - id: 8341
+    simValue: 0.92387414
+    isFloat: 1
+  - id: 911
+    simValue: 0.9520033
+    isFloat: 1
+  - id: QUERDENKEN714Marbach
+    simValue: 0.9515393
+    isFloat: 1
+  - id: QUERDENKEN_30
+    simValue: 0.75117445
+    isFloat: 1
+  - id: QUERDENKEN_5221
+    simValue: 0.72358936
+    isFloat: 1
+  - id: QUERDENKEN_5231
+    simValue: 0.22384065
+    isFloat: 1
+  - id: QUERDENKEN_621
+    simValue: 0.91803646
+    isFloat: 1
+  - id: QUERDENKEN_711
+    simValue: 0.9276644
+    isFloat: 1
+  - id: QUERDENKEN_7171
+    simValue: 0.8871067
+    isFloat: 1
+  - id: QUERDENKEN_721
+    simValue: 0.8267576
+    isFloat: 1
+  - id: QUERDENKEN_722
+    simValue: 0.88116425
+    isFloat: 1
+  - id: QUERDENKEN_743
+    simValue: 0.6593825
+    isFloat: 1
+  - id: QUERDENKEN_762
+    simValue: 0.5984329
+    isFloat: 1
+  - id: QUERDENKEN_791
+    simValue: 0.97164524
+    isFloat: 1
+  - id: QUERDENKEN_794
+    simValue: 0.9091232
+    isFloat: 1
+  - id: QUERDENKEN_8331
+    simValue: 0.93095773
+    isFloat: 1
+  - id: QUERDENKEN_881
+    simValue: 0.9481857
+    isFloat: 1
+  - id: Querdenken089Demo
+    simValue: 0.9764012
+    isFloat: 1
+  - id: Querdenken381Rostock
+    simValue: 0.8853616
+    isFloat: 1
+  - id: Querdenken_713_info
+    simValue: 0.9603094
+    isFloat: 1
+  - id: Querdenken_Brandenburg_Chat
+    simValue: 0.9574392
+    isFloat: 1
+  - id: QuerdenkerChat
+    simValue: 0.9048962
+    isFloat: 1
+  - id: QuerdenkerZwickau
+    simValue: 1
+    isFloat: 1
+  - id: QuerdenkerZwickauNeuigkeitenWelt
+    simValue: 0.89491904
+    isFloat: 1
+  - id: RA_Ludwig
+    simValue: 0.9348763
+    isFloat: 1
+  - id: qd334info
+    simValue: 0.9456482
+    isFloat: 1
+  - id: querdenken421
+    simValue: 0.98127234
+    isFloat: 1
+  - id: querdenken491
+    simValue: 0.9550149
+    isFloat: 1
+  - id: querdenken511
+    simValue: 0.9253092
+    isFloat: 1
+  - id: querdenken511demoterminekanal
+    simValue: 0.5789595
+    isFloat: 1
+  - id: querdenken611_infokanal
+    simValue: 0.97487336
+    isFloat: 1
+  - id: querdenken911_termine
+    simValue: 0.9676664
+    isFloat: 1
+  - id: querdenken_211
+    simValue: 0.9731907
+    isFloat: 1
+  - id: querdenken_234
+    simValue: 0.86144304
+    isFloat: 1
+  - id: querdenken_2932
+    simValue: 0.7342171
+    isFloat: 1
+  - id: querdenken_341
+    simValue: 0.87559515
+    isFloat: 1
+  - id: querdenken_351
+    simValue: 0.71752083
+    isFloat: 1
+  - id: querdenken_441
+    simValue: 0.96019757
+    isFloat: 1
+  - id: querdenken_571
+    simValue: 0.9645831
+    isFloat: 1
+  - id: querdenken_6051
+    simValue: 0.8450992
+    isFloat: 1
+  - id: querdenken_615
+    simValue: 0.93442804
+    isFloat: 1
+  - id: querdenken_681
+    simValue: 0.612814
+    isFloat: 1
+  - id: querdenken_69
+    simValue: 0.8667875
+    isFloat: 1
+  - id: querdenken_793
+    simValue: 0.86915284
+    isFloat: 1
+  - id: querdenken_911
+    simValue: 0.901347
+    isFloat: 1
+  - id: querdenken_brandenburg
+    simValue: 0.9595402
+    isFloat: 1
+  - id: querdenken_bremen
+    simValue: 0.91166073
+    isFloat: 1
+  - id: querdenkenhameln
+    simValue: 0.95570284
+    isFloat: 1
+  - id: querdenker6
+    simValue: 0.8184006
+    isFloat: 1
+  - id: wahrheitstalk
+    simValue: 0.93778914
+    isFloat: 1
+  - id: querdenken_30info
+    simValue: 0.6726131
+    isFloat: 1
