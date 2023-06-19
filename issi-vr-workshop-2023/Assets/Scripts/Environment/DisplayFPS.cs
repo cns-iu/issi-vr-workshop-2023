@@ -5,9 +5,12 @@ using TMPro;
 
 namespace AndreasBueckle.Assets.Scripts.Environment
 {
+    /// <summary>
+    /// Displays the frames per second in a specified interval
+    /// </summary>
     public class DisplayFPS : MonoBehaviour
     {
-        [SerializeField] private float updateDelay = 0f;
+        [SerializeField] private float updateDelay = 0.1f;
         private float _targetFPS = 72f;
         private float _currentFPS = 0f;
         private float _deltaTime = 0f;
@@ -38,7 +41,7 @@ namespace AndreasBueckle.Assets.Scripts.Environment
         /// <summary>
         /// Displays the current frames per second in a soecified interval
         /// </summary>
-        /// <returns>an IEnumerator (WaitForSeconds)</returns>
+        /// <returns>an IEnumerator (WaitForSeconds) with the specified update interval</returns>
         private IEnumerator DisplayFramesPerSecond()
         {
             while (true)

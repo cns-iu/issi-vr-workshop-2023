@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 namespace AndreasBueckle.Assets.Scripts.Visualization
 {
+    /// <summary>
+    /// Switches the volume on and volume off symbols on the mute toggle
+    /// </summary>
     public class SpriteChanger : MonoBehaviour
     {
         [SerializeField] private Toggle _muteButton;

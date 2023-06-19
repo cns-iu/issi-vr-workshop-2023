@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 
 namespace AndreasBueckle.Assets.Scripts.Data
 {
+    /// <summary>
+    /// A class to hold data for a node. Can be added to a GameObject
+    /// </summary>
     public class NodeData : MonoBehaviour
     {
         public string id;
@@ -24,6 +27,12 @@ namespace AndreasBueckle.Assets.Scripts.Data
         public string location;
         public Layout layout;
 
+        /// <summary>
+        /// A helper function to set the fields of this NodeData using properties for a Node struct. This should be done after
+        /// calling the <c>Instantiate()</c> method with the <c>Node</c> prefab.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="layout"></param>
         public void Init(Node node, Layout layout)
         {
             id = node.Id;

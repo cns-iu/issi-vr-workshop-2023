@@ -11,6 +11,9 @@ using AndreasBueckle.Assets.Scripts.Visualization;
 
 public enum Layout { Network, Geospatial };
 
+/// <summary>
+/// Builds the geospatial and network visualiations at the start of the application
+/// </summary>
 public class Visualizer : MonoBehaviour
 {
     public static Visualizer Instance { get; private set; }
@@ -77,7 +80,9 @@ public class Visualizer : MonoBehaviour
     [field: SerializeField] private float minNodeSize;
     [field: SerializeField] private float maxNodeSize;
 
-
+    /// <summary>
+    /// Driver code, runs during the first frame of the application
+    /// </summary>
     void Start()
     {
         GetLists();
@@ -104,6 +109,11 @@ public class Visualizer : MonoBehaviour
         RotateNodeParent();
     }
 
+    /// <summary>
+    /// Creates edges given the specified layout
+    /// </summary>
+    /// <param name="layout"></param>
+    /// <returns></returns>
     List<GameObject> CreateEdges(Layout layout)
     {
         List<GameObject> result = new List<GameObject>();
@@ -133,12 +143,18 @@ public class Visualizer : MonoBehaviour
         }
 
         return result;
-
     }
 
+    /// <summary>
+    /// Adjust the edge's position and width, given a list with all edge GameObjects
+    /// </summary>
+    /// <param name="e">A list of all edges (as instantiated GameObjects</param>
     void SetEdgePositionsandWidth(List<GameObject> e)
     {
+        //First, we get the maximum weight of all edges
         _maxWeight = GetMaxWeight(edges);
+
+        //Then, we loop through all edge objects and set the start and end
         for (int i = 0; i < e.Count; i++)
         {
             GameObject line = e[i];
@@ -150,6 +166,7 @@ public class Visualizer : MonoBehaviour
                 }
             );
 
+            //Then, we use a utility function to determine the raw start and end width given the edge's weight
             float startWidth = data.Weight.Remap(
                 0f, _maxWeight, _minStartWidth, _maxStartWidth
                 );
@@ -159,11 +176,11 @@ public class Visualizer : MonoBehaviour
 
             LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
 
-            //set width
+            //We set the width with a scale factor
             lineRenderer.startWidth = startWidth * edgeScaleFactor;
             lineRenderer.endWidth = endWidth * edgeScaleFactor;
 
-            //set color
+            //We set the start and end color to denote source and target
             float alpha = data.Weight.Remap(
                 0f, _maxWeight, .3f, 1f
                 );
@@ -178,6 +195,11 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// We assign parent transforms for easier handling in the editor, and to be able to move all edges together more easily
+    /// </summary>
+    /// <param name="objects"></param>
+    /// <param name="parent"></param>
     void Parent(List<GameObject> objects, Transform parent)
     {
         for (int i = 0; i < objects.Count; i++)
@@ -186,6 +208,9 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Capture all nodes' default position 
+    /// </summary>
     void GetNodeDefaultPositions()
     {
         for (int i = 0; i < NodeObjectsNetwork.Count; i++)
@@ -195,12 +220,20 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets references to the Nodes and Edges lists (structs) from the DataReader
+    /// </summary>
     void GetLists()
     {
         nodes = DataReader.Instance.Nodes;
         edges = DataReader.Instance.Edges;
     }
 
+    /// <summary>
+    /// Gets the max weight from a list of edges
+    /// </summary>
+    /// <param name="edges">All the edges from the DataReader</param>
+    /// <returns>The maximum weight of all edges</returns>
     float GetMaxWeight(List<Edge> edges)
     {
         List<float> weights = new List<float>();
@@ -212,6 +245,11 @@ public class Visualizer : MonoBehaviour
         return Mathf.Max(weights.ToArray());
     }
 
+    /// <summary>
+    /// Adds connection properties for node objects, i.e., adds incoming and outgoing edges to dedicated lists on their NodeData components
+    /// </summary>
+    /// <param name="nodes"></param>
+    /// <param name="edges"></param>
     void ForNodesAndEdgesFillConnectionProperties(List<GameObject> nodes, List<GameObject> edges)
     {
         for (int i = 0; i < nodes.Count; i++)
@@ -236,6 +274,11 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Lays out nodes in 3D, given a Layout option (geospatial or network)
+    /// </summary>
+    /// <param name="layout"></param>
+    /// <param name="objects"></param>
     void LayOutNodes(Layout layout, List<GameObject> objects)
     {
         switch (layout)
@@ -262,6 +305,10 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// When laying nodes out geospatially, this function ensures that those with identical lat/lon are stacked on top of each other to avoid occlusion
+    /// </summary>
+    /// <param name="nodes"></param>
     void StackNodes(List<GameObject> nodes)
     {
         for (int i = 0; i < nodes.Count; i++)
@@ -286,6 +333,12 @@ public class Visualizer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adjust lat/lon values from coordinates to a position on the terrain table, given the Transforms of confining GameObjects
+    /// </summary>
+    /// <param name="originalLat"></param>
+    /// <param name="originalLon"></param>
+    /// <returns>A Vector3 with a corrected position to fit on the table</returns>
     Vector3 GetCorrectedLatLonForWorld(float originalLat, float originalLon)
     {
         if (originalLat == 0) return _corners[4].transform.position;
@@ -313,6 +366,11 @@ public class Visualizer : MonoBehaviour
         return corrected;
     }
 
+    /// <summary>
+    /// Creates node objects for a desired Layout
+    /// </summary>
+    /// <param name="layout"></param>
+    /// <returns>A list of GameObjects for the nodes</returns>
     List<GameObject> CreateNodeObjects(Layout layout)
     {
         List<GameObject> result = new List<GameObject>();
@@ -320,7 +378,7 @@ public class Visualizer : MonoBehaviour
         {
             GameObject mark = Instantiate(pre_Node);
             NodeData data = mark.GetComponent<NodeData>();
-            //mark.AddComponent<HighlightCorrespondingNode>();
+            
             data.Init(node, layout);
 
             if (node.EntityType == "Group")
@@ -353,11 +411,19 @@ public class Visualizer : MonoBehaviour
         return result;
     }
 
+    /// <summary>
+    /// Rotates a node parent by a specified amount of degrees
+    /// </summary>
     private void RotateNodeParent()
     {
         nodeParentNetwork.Rotate(new Vector3(0, 90, 0));
     }
 
+    /// <summary>
+    /// Sets the size of each node given the number of sent messages in the entity
+    /// </summary>
+    /// <param name="nodes">A list of all the node objects</param>
+    /// <param name="layout">A desired Layout</param>
     void SizeNodes(List<GameObject> nodes, Layout layout)
     {
         List<float> messages = new List<float>();

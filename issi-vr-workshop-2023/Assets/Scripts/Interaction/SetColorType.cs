@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 namespace AndreasBueckle.Assets.Scripts.Interaction
 {
+    /// <summary>
+    /// A class to handle resetting the color type of the geospatial nodes when a button has been clicked
+    /// </summary>
     public class SetColorType : MonoBehaviour
     {
         private void OnEnable()

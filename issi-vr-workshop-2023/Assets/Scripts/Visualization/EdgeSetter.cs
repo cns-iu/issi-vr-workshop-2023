@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace AndreasBueckle.Assets.Scripts.Visualization
 {
+    /// <summary>
+    /// A class to ensure that an edge begins at its source node and ends at its target node
+    /// </summary>
     public class EdgeSetter : MonoBehaviour
     {
         [SerializeField] private EdgeData data;

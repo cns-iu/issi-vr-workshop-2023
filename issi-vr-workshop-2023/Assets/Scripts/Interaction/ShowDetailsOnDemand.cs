@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 
 namespace AndreasBueckle.Assets.Scripts.Interaction
 {
+    /// <summary>
+    /// A test class to print the currently performed action (from a list) to the console
+    /// </summary>
     public class ShowDetailsOnDemand : MonoBehaviour
     {
         [SerializeField] private List<InputActionReference> references = new List<InputActionReference>();

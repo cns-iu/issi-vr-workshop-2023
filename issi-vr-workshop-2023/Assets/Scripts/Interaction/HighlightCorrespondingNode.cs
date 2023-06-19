@@ -9,6 +9,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace AndreasBueckle.Assets.Scripts.Interaction
 {
+    /// <summary>
+    /// Adds a brush and link functionality, where a node that a user brushes with their ray of on their right hand is highlighted in both visualizations
+    /// </summary>
     public class HighlightCorrespondingNode : MonoBehaviour
     {
         [SerializeField] private XRRayInteractor _interactor;
@@ -20,6 +23,10 @@ namespace AndreasBueckle.Assets.Scripts.Interaction
             _interactor.hoverEntered.AddListener(SetHighlights);
         }
 
+        /// <summary>
+        /// A function to activate the Outline components in bith the brushed and the linked node.
+        /// </summary>
+        /// <param name="args"></param>
         void SetHighlights(HoverEnterEventArgs args)
         {
 
@@ -52,6 +59,11 @@ namespace AndreasBueckle.Assets.Scripts.Interaction
             TurnOffOtherNodes(Visualizer.Instance.NodeObjectsNetwork, nodeData.id);
         }
 
+        /// <summary>
+        /// Turns off nodes that are not highlighted anymore
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="id"></param>
         void TurnOffOtherNodes(List<GameObject> list, string id)
         {
             foreach (var item in list)
@@ -60,7 +72,12 @@ namespace AndreasBueckle.Assets.Scripts.Interaction
             }
         }
 
-
+        /// <summary>
+        /// Finds the corresponding node in the other visualization
+        /// </summary>
+        /// <param name="list"></param>
+        /// <param name="id"></param>
+        /// <returns>The result of a LINQ query as an IEnumerable with GameObjects</returns>
         IEnumerable<GameObject> GetOtherNode(List<GameObject> list, string id)
         {
             IEnumerable<GameObject> result = list.Where(n => n.GetComponent<NodeData>().id == id).ToList();

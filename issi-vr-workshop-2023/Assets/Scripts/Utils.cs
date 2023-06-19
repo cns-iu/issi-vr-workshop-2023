@@ -10,6 +10,11 @@ public static class Utils
         return new StreamReader(new MemoryStream(data.bytes));
     }
 
+    /// <summary>
+    /// A recursive function to return all the leaves in a tree on a list
+    /// </summary>
+    /// <param name="parent">The parent on which to start the recursive function</param>
+    /// <param name="result">The list holding the leaves, and to which to add a leaf in the base case</param>
     public static void FindLeaves(Transform parent, List<GameObject> result)
     {
         if (parent.childCount == 0)
@@ -24,7 +29,6 @@ public static class Utils
             }
         }
     }
-
 
     /// <summary>
     /// Remaps a value from one range to another

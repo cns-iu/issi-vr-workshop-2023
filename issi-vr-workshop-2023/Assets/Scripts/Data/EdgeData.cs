@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace AndreasBueckle.Assets.Scripts.Data
 {
+    /// <summary>
+    /// This class can be added to a GameObject. It holds public fields describing an edge
+    /// </summary>
     public class EdgeData : MonoBehaviour
     {
         public string Source;

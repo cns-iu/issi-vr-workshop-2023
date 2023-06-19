@@ -6,6 +6,9 @@ using System.Linq;
 
 namespace Assets.Scripts.Data
 {
+    /// <summary>
+    /// A class to read data from a CSV file and make the data available to the rest of the application
+    /// </summary>
     public class DataReader : MonoBehaviour
     {
         public static DataReader Instance;
@@ -21,6 +24,9 @@ namespace Assets.Scripts.Data
         [Header("Counts")]
         [field: SerializeField] private Dictionary<string, string> nameToEntityTypeMapping = new Dictionary<string, string>();
 
+        /// <summary>
+        /// This function is called before the first frame of the application
+        /// </summary>
         void Awake()
         {
             if (Instance != null && Instance != this)
@@ -37,6 +43,11 @@ namespace Assets.Scripts.Data
             ReadNodeList();
         }
 
+        /// <summary>
+        /// Reads an edge list from a specified path, parses lines, creates edges, and stores them in a collection
+        /// </summary>
+        /// 
+        /// 
         void ReadEdgeList()
         {
             using (var reader = Utils.ReadCsv(edgeList))
@@ -59,6 +70,9 @@ namespace Assets.Scripts.Data
             }
         }
 
+        /// <summary>
+        /// Reads an node list from a specified path, parses lines, creates nodes, and stores them in a collection
+        /// </summary>
         void ReadNodeList()
         {
             int messages = 0, activeUsers = 0;
@@ -103,6 +117,9 @@ namespace Assets.Scripts.Data
 
     }
 
+    /// <summary>
+    /// A <c>struct</c> to describe a node and its properties
+    /// </summary>
     [Serializable]
     public struct Node
     {
@@ -116,6 +133,11 @@ namespace Assets.Scripts.Data
         [field: SerializeField] public float Longitude { get; set; }
         [field: SerializeField] public string Location { get; set; }
 
+        /// <summary>
+        /// Constructs a new node
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="position"></param>
         public Node(string id, Vector3 position)
         {
             Id = id;
@@ -129,6 +151,9 @@ namespace Assets.Scripts.Data
         }
     }
 
+    /// <summary>
+    /// A <c>struct</c> to describe an edge and its properties
+    /// </summary>  
     [Serializable]
     public class Edge
     {
@@ -137,6 +162,13 @@ namespace Assets.Scripts.Data
         [field: SerializeField] public float Weight { get; private set; }
         [field: SerializeField] public int TimeStep { get; private set; }
 
+        /// <summary>
+        /// A constructor for an edge
+        /// </summary>
+        /// <param name="sourceID"></param>
+        /// <param name="targetID"></param>
+        /// <param name="sentAtQuarter"></param>
+        /// <param name="weight"></param>
         public Edge(string sourceID, string targetID, int sentAtQuarter, float weight)
         {
             SourceID = sourceID;

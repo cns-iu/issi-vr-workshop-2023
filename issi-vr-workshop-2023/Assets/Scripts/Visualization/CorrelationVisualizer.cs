@@ -11,6 +11,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 namespace AndreasBueckle.Assets.Scripts.Visualization
 {
+    /// <summary>
+    /// A class to handle coliring all geospatial nodes depending on their cosine similarity with the selected node
+    /// </summary>
     public class CorrelationVisualizer : MonoBehaviour
     {
         [Header("Controllers")]
@@ -21,24 +24,21 @@ namespace AndreasBueckle.Assets.Scripts.Visualization
         [SerializeField] private string _timestep;
         [SerializeField] private SimilarityMatrix _matrix;
         [SerializeField] private NodeData _data;
-        //[SerializeField] private List<GameObject> _nodes = new List<NodeData>();
 
         [Header("Colors")]
         [SerializeField] private Color _lowCorrelation;
         [SerializeField] private Color _highCorrelation;
-        // example for subscribing with delegate
-        //private UnityAction<SelectEnterEventArgs> _selectEnter;
 
         private void OnEnable()
         {
             _interactor.selectEntered.AddListener(GetSimilaritiesForSelected);
-
-            ////example for subscribing with lambda
-            //_interactor.selectEntered.AddListener((SelectEnterEventArgs args) => { });
-            ////example for subscribing with delegate
-            //_interactor.selectEntered.AddListener(_selectEnter);
         }
 
+        /// <summary>
+        /// Method to subscribe to selectEntered of right hand controller, gets a reference to the NodeData of the selected node,
+        /// loads the corresponding cosine similarity matrix, and then calls a method to color the node.
+        /// </summary>
+        /// <param name="args"></param>
         private void GetSimilaritiesForSelected(SelectEnterEventArgs args)
         {
             _data = args.interactableObject.transform.gameObject.GetComponent<NodeData>();
@@ -46,6 +46,11 @@ namespace AndreasBueckle.Assets.Scripts.Visualization
             ColorNodes(_matrix, _data);
         }
 
+        /// <summary>
+        /// Loops through all the nodes and colors them based on their cosine similarity 
+        /// </summary>
+        /// <param name="matrix"></param>
+        /// <param name="data"></param>
         private void ColorNodes(SimilarityMatrix matrix, NodeData data)
         {
             for (int i = 0; i < Visualizer.Instance.NodeObjectsGeospatial.Count; i++)
@@ -61,21 +66,5 @@ namespace AndreasBueckle.Assets.Scripts.Visualization
                 }
             }
         }
-
-        private void Start()
-        {
-
-            //_interactor = GetComponent<XRRayInteractor>();
-
-
-            // example for subscribing with delegate
-            //_selectEnter = MyFunc;
-        }
-
-        private void MyFunc(SelectEnterEventArgs args)
-        {
-
-        }
-
     }
 }
