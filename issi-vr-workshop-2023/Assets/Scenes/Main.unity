@@ -850,6 +850,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -15352,6 +15353,13 @@ MonoBehaviour:
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_CustomReticle: {fileID: 0}
+  m_AllowGazeInteraction: 0
+  m_AllowGazeSelect: 0
+  m_OverrideGazeTimeToSelect: 0
+  m_GazeTimeToSelect: 0.5
+  m_OverrideTimeToAutoDeselectGaze: 0
+  m_TimeToAutoDeselectGaze: 3
+  m_AllowGazeAssistance: 0
   m_FirstHoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -15384,6 +15392,7 @@ MonoBehaviour:
       m_Calls: []
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
+  m_StartingInteractionStrengthFilters: []
   m_OnFirstHoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -15594,10 +15603,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSDisplay
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8726504883945726124, guid: 4a233a4842dc0f8409288f7a03bd1157, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4908482801316582202, guid: 4a233a4842dc0f8409288f7a03bd1157,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2121930297}
   m_SourcePrefab: {fileID: 100100000, guid: 4a233a4842dc0f8409288f7a03bd1157, type: 3}
 --- !u!224 &145196652 stripped
 RectTransform:
@@ -17476,9 +17490,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8211540750725778357, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
-    - {fileID: -6645929537691708538, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: 0}
     - {fileID: 6651408970793479925, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     - {fileID: 8281515479030075264, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: -7242532719447310967, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -19263,6 +19278,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -21864,6 +21880,7 @@ MonoBehaviour:
   m_BlockedReticle: {fileID: 0}
   m_StopLineAtFirstRaycastHit: 1
   m_StopLineAtSelection: 0
+  m_SnapEndpointIfAvailable: 1
 --- !u!120 &595848430
 LineRenderer:
   serializedVersion: 2
@@ -21988,6 +22005,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
+  m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
   m_HoverEntered:
@@ -22072,9 +22090,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+  m_RaycastSnapVolumeInteraction: 1
   m_HitClosestOnly: 0
   m_HoverToSelect: 0
   m_HoverTimeToSelect: 0.5
+  m_AutoDeselect: 0
+  m_TimeToAutoDeselect: 3
   m_EnableUIInteraction: 1
   m_AllowAnchorControl: 1
   m_UseForceGrab: 1
@@ -22283,7 +22304,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 595848426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ec34603edc12e418f18de084355fa8, type: 3}
+  m_Script: {fileID: 11500000, guid: a0e13e36c8abc0c4488419a2188fb595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _interactor: {fileID: 595848431}
@@ -22302,7 +22323,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 595848426}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f125b49362bad144190bcba4d41470ee, type: 3}
+  m_Script: {fileID: 11500000, guid: a3d344f484613534e90c7b82985d1cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _interactor: {fileID: 595848431}
@@ -23904,9 +23925,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8211540750725778357, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
-    - {fileID: -6645929537691708538, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: 0}
     - {fileID: 6651408970793479925, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     - {fileID: 8281515479030075264, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: -7242532719447310967, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -27352,7 +27374,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 826765062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7c1af827f1d8a84cbc05599a0a5265d, type: 3}
+  m_Script: {fileID: 11500000, guid: 639447ed55caa424d84b8dcfd1c55a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _muteButton: {fileID: 205776561}
@@ -28886,6 +28908,13 @@ MonoBehaviour:
   m_DistanceCalculationMode: 1
   m_SelectMode: 1
   m_CustomReticle: {fileID: 0}
+  m_AllowGazeInteraction: 0
+  m_AllowGazeSelect: 0
+  m_OverrideGazeTimeToSelect: 0
+  m_GazeTimeToSelect: 0.5
+  m_OverrideTimeToAutoDeselectGaze: 0
+  m_TimeToAutoDeselectGaze: 3
+  m_AllowGazeAssistance: 0
   m_FirstHoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -28918,6 +28947,7 @@ MonoBehaviour:
       m_Calls: []
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
+  m_StartingInteractionStrengthFilters: []
   m_OnFirstHoverEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -29522,9 +29552,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8211540750725778357, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
-    - {fileID: -6645929537691708538, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: 0}
     - {fileID: 6651408970793479925, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     - {fileID: 8281515479030075264, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: -7242532719447310967, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -30169,9 +30200,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8211540750725778357, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
-    - {fileID: -6645929537691708538, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: 0}
     - {fileID: 6651408970793479925, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     - {fileID: 8281515479030075264, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: -7242532719447310967, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -30853,7 +30885,7 @@ PrefabInstance:
     - target: {fileID: 6598815579406187037, guid: 9f5a24a380916d14db9775daab4fe333,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30936,7 +30968,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1125589606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f5265150509d2249a6eaf97b99ef651, type: 3}
+  m_Script: {fileID: 11500000, guid: d7da33d13d8e51643a9ce6704aba5133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   EdgeObjectsNetwork: []
@@ -32793,6 +32825,7 @@ MonoBehaviour:
   m_Dithering: 0
   m_ClearDepth: 1
   m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
   m_UseScreenCoordOverride: 0
   m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
@@ -33059,6 +33092,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -34573,7 +34607,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466981029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ea84b1f20086e4d93cfbfea1e86c9e, type: 3}
+  m_Script: {fileID: 11500000, guid: 80265addb79b8674eb3d297d9adf9e19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   edgeList: edgelist_vr_3dcoords_entType_issi_feb21
@@ -34664,7 +34698,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1467344197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a13bbbacdbea51e429d0bcc28218c287, type: 3}
+  m_Script: {fileID: 11500000, guid: 390419745500d204aa709d3ee2edef52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _muteButton: {fileID: 205776561}
@@ -35540,9 +35574,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8211540750725778357, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
-    - {fileID: -6645929537691708538, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: 0}
     - {fileID: 6651408970793479925, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     - {fileID: 8281515479030075264, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: -7242532719447310967, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -37581,6 +37616,7 @@ MonoBehaviour:
   m_Dithering: 0
   m_ClearDepth: 1
   m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
   m_UseScreenCoordOverride: 0
   m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
@@ -37841,6 +37877,7 @@ MonoBehaviour:
   m_BlockedReticle: {fileID: 0}
   m_StopLineAtFirstRaycastHit: 1
   m_StopLineAtSelection: 0
+  m_SnapEndpointIfAvailable: 1
 --- !u!120 &1810707164
 LineRenderer:
   serializedVersion: 2
@@ -37965,6 +38002,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
+  m_DisableVisualsWhenBlockedInGroup: 1
   m_StartingSelectedInteractable: {fileID: 0}
   m_StartingTargetFilter: {fileID: 0}
   m_HoverEntered:
@@ -38049,9 +38087,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RaycastTriggerInteraction: 1
+  m_RaycastSnapVolumeInteraction: 1
   m_HitClosestOnly: 0
   m_HoverToSelect: 0
   m_HoverTimeToSelect: 0.5
+  m_AutoDeselect: 0
+  m_TimeToAutoDeselect: 3
   m_EnableUIInteraction: 1
   m_AllowAnchorControl: 1
   m_UseForceGrab: 1
@@ -38260,7 +38301,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1810707160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c5d351c5eb06804dbb92a7314f18435, type: 3}
+  m_Script: {fileID: 11500000, guid: c0f89f2f4258c474abe2f3e0caccca06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _prompt: {fileID: 1921682429}
@@ -39787,6 +39828,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -40318,9 +40360,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8211540750725778357, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
-    - {fileID: -6645929537691708538, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: 0}
     - {fileID: 6651408970793479925, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     - {fileID: 8281515479030075264, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
+    - {fileID: -7242532719447310967, guid: 3c45085a4a4324d42babf62d6ca8fffa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -40760,6 +40803,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1113402543}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2121930292 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4908482801316582202, guid: 4a233a4842dc0f8409288f7a03bd1157,
+    type: 3}
+  m_PrefabInstance: {fileID: 145196651}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2121930297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121930292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7443c78d016a67541a94df086d3e3a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateDelay: 0.1
 --- !u!1 &2128682080
 GameObject:
   m_ObjectHideFlags: 0
