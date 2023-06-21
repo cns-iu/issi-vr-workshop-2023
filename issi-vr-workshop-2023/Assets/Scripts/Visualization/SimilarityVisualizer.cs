@@ -11,7 +11,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 namespace AndreasBueckle.Assets.Scripts.Visualization
 {
     /// <summary>
-    /// A class to handle coliring all geospatial nodes depending on their cosine similarity with the selected node
+    /// A class to handle coloring all geospatial nodes depending on their cosine similarity with the selected node
     /// </summary>
     public class SimilarityVisualizer : MonoBehaviour
     {
