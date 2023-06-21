@@ -1,11 +1,10 @@
-using Assets.Scripts.Data;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace AndreasBueckle.Assets.Scripts.Data
+namespace AndreasBueckle.Assets.Scripts.Visualization
 {
     /// <summary>
     /// A class to hold data for a node. Can be added to a GameObject
@@ -31,8 +30,8 @@ namespace AndreasBueckle.Assets.Scripts.Data
         /// A helper function to set the fields of this NodeData using properties for a Node struct. This should be done after
         /// calling the <c>Instantiate()</c> method with the <c>Node</c> prefab.
         /// </summary>
-        /// <param name="node"></param>
-        /// <param name="layout"></param>
+        /// <param name="node">Node struct with data for node to be created</param>
+        /// <param name="layout">desired layout to which this node belongs</param>
         public void Init(Node node, Layout layout)
         {
             id = node.Id;

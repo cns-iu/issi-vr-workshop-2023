@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 
-namespace Assets.Scripts.Data
+namespace AndreasBueckle.Assets.Scripts.Visualization
 {
     /// <summary>
     /// A class to read data from a CSV file and make the data available to the rest of the application
@@ -46,8 +46,6 @@ namespace Assets.Scripts.Data
         /// <summary>
         /// Reads an edge list from a specified path, parses lines, creates edges, and stores them in a collection
         /// </summary>
-        /// 
-        /// 
         void ReadEdgeList()
         {
             using (var reader = Utils.ReadCsv(edgeList))
@@ -136,8 +134,8 @@ namespace Assets.Scripts.Data
         /// <summary>
         /// Constructs a new node
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="position"></param>
+        /// <param name="id">node ID</param>
+        /// <param name="position">pre-computed3D position</param>
         public Node(string id, Vector3 position)
         {
             Id = id;
@@ -165,10 +163,10 @@ namespace Assets.Scripts.Data
         /// <summary>
         /// A constructor for an edge
         /// </summary>
-        /// <param name="sourceID"></param>
-        /// <param name="targetID"></param>
-        /// <param name="sentAtQuarter"></param>
-        /// <param name="weight"></param>
+        /// <param name="sourceID">ID of the source node</param>
+        /// <param name="targetID">ID of the target node</param>
+        /// <param name="sentAtQuarter">time step of the edge</param>
+        /// <param name="weight">weight of the edge (strength of reference)</param>
         public Edge(string sourceID, string targetID, int sentAtQuarter, float weight)
         {
             SourceID = sourceID;

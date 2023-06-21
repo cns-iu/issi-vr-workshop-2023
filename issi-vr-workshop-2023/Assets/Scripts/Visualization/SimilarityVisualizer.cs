@@ -1,4 +1,3 @@
-using AndreasBueckle.Assets.Scripts.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,9 +11,9 @@ using UnityEngine.XR.Interaction.Toolkit;
 namespace AndreasBueckle.Assets.Scripts.Visualization
 {
     /// <summary>
-    /// A class to handle coliring all geospatial nodes depending on their cosine similarity with the selected node
+    /// A class to handle coloring all geospatial nodes depending on their cosine similarity with the selected node
     /// </summary>
-    public class CorrelationVisualizer : MonoBehaviour
+    public class SimilarityVisualizer : MonoBehaviour
     {
         [Header("Controllers")]
         [SerializeField] private XRRayInteractor _interactor;
@@ -38,7 +37,7 @@ namespace AndreasBueckle.Assets.Scripts.Visualization
         /// Method to subscribe to selectEntered of right hand controller, gets a reference to the NodeData of the selected node,
         /// loads the corresponding cosine similarity matrix, and then calls a method to color the node.
         /// </summary>
-        /// <param name="args"></param>
+        /// <param name="args">Select enter event arguments to pass (must take those to subscribe to selectEntered event raised)</param>
         private void GetSimilaritiesForSelected(SelectEnterEventArgs args)
         {
             _data = args.interactableObject.transform.gameObject.GetComponent<NodeData>();
@@ -49,8 +48,8 @@ namespace AndreasBueckle.Assets.Scripts.Visualization
         /// <summary>
         /// Loops through all the nodes and colors them based on their cosine similarity 
         /// </summary>
-        /// <param name="matrix"></param>
-        /// <param name="data"></param>
+        /// <param name="matrix">A pre-computed similarity matrix</param>
+        /// <param name="data">The NodeData of the selected node</param>
         private void ColorNodes(SimilarityMatrix matrix, NodeData data)
         {
             for (int i = 0; i < Visualizer.Instance.NodeObjectsGeospatial.Count; i++)

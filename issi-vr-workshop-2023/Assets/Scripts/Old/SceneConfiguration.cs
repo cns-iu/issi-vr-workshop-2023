@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using AndreasBueckle.Assets.Scripts.Data;
+using AndreasBueckle.Assets.Scripts.Visualization;
 
 public enum AppState { Network, Geospatial }
 
