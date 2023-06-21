@@ -11,10 +11,11 @@ namespace AndreasBueckle.Assets.Scripts.Interaction
     public class ShowDetailsOnDemand : MonoBehaviour
     {
         [SerializeField] private List<InputActionReference> references = new List<InputActionReference>();
-        // Start is called before the first frame update
+        
 
         private void OnEnable()
         {
+            ///subscribe to all actions with a lambda function that prints the name of the performed action
             foreach (var r in references)
             {
                 r.action.performed += (context) => { Debug.Log(r.action.name); };

@@ -16,6 +16,7 @@ namespace AndreasBueckle.Assets.Scripts.Visualization
 
         private void OnEnable()
         {
+            //when mute button is toggled on or off, change sprite accordingly
             _muteButton.onValueChanged.AddListener(
                 (doMute) =>
                 {

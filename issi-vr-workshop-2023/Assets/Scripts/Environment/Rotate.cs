@@ -10,6 +10,8 @@ namespace AndreasBueckle.Assets.Scripts.Environment
     public class Rotate : MonoBehaviour
     {
         [SerializeField] private float _degreesPerSecond = 6f;
+
+        //runs every frame
         private void Update()
         {
             transform.Rotate(-_degreesPerSecond * Time.deltaTime, 0f, 0f);

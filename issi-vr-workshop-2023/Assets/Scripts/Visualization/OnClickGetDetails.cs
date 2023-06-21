@@ -4,9 +4,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using TMPro;
-using AndreasBueckle.Assets.Scripts.Data;
 
-namespace AndreasBueckle.Assets.Scripts.Interaction
+namespace AndreasBueckle.Assets.Scripts.Visualization
 {
     /// <summary>
     /// A class with functionality to get node data from a clicked node
