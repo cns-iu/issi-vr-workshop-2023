@@ -15773,6 +15773,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSDisplay
       objectReference: {fileID: 0}
+    - target: {fileID: 4908482800323263199, guid: 4a233a4842dc0f8409288f7a03bd1157,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8726504883945726124, guid: 4a233a4842dc0f8409288f7a03bd1157, type: 3}
     m_RemovedGameObjects: []
