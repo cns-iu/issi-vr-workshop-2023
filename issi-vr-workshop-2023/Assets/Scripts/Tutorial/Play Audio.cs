@@ -47,13 +47,16 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
 
         void OnTriggerEnter(Collider colliderObj) 
         {
+            Debug.Log("In Trigger method");
             if (colliderObj.CompareTag("IntroNavMarker"))
             {
                 TutorialManager.Instance.ChooseAudio("IntroNavMarker");
+                colliderObj.enabled = false;
             }
             else if (colliderObj.CompareTag("VizNavMarker"))
             {
                 TutorialManager.Instance.ChooseAudio("VizNavMarker");
+                colliderObj.enabled = false;
             }
         }
 
