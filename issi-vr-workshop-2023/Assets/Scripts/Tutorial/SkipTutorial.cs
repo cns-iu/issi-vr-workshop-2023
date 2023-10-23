@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace AndreasBueckle.Assets.Scripts.Tutorial
 {
+    /// <summary>
+    /// A class to implement the skip and replay functionalities of the tutorial.
+    /// </summary>
     public class SkipTutorial : MonoBehaviour
     {
         public GameObject TutorialAudio;

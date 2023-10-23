@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace AndreasBueckle.Assets.Scripts.Tutorial
 {
+    /// <summary>
+    /// A class to control the tutorial narration.
+    /// </summary>
     public class PlayAudio : MonoBehaviour
     {
 

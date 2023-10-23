@@ -33,7 +33,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             }
             else
             {
-                Instance = this;
+                Instance = this; 
             }
         }
 
@@ -88,3 +88,6 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         }
     }
 }
+
+
+//make particle system intertwined, move in a wavy pattern, more real. instead of just straightly lerping to a position. also applies to tutorial guide animation. Make the skip buttons collapsible, maybe a hamburger menu.
