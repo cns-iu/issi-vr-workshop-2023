@@ -27,23 +27,25 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             originPosition = currentPosition = this.transform.position;
             //newPosition = Random.insideUnitSphere * 0.5f;
             //newPosition = Vector3.Lerp(originPosition, originPosition + Random.insideUnitSphere * 2, 0.5f);
-            StartCoroutine(MoveParticleSystem());
+            //StartCoroutine(MoveParticleSystem());
             //Debug.Log("Origin Position" + originPosition);
         }
 
-        //private void FixedUpdate()
-        //{
-        //    Debug.Log("Origin Coord"+ originPosition);
-
-        //    StartCoroutine(MoveParticleSystem());
-
-        //    this.transform.position = newPosition;
-        //}
+        // Update is called once per frame
+        void Update()
+        {
+            if (TutorialManager.Instance.finishedIntro < 3)
+            {
+                StartCoroutine(MoveParticleSystem());
+            }
+        }
 
         IEnumerator MoveParticleSystem()
         {
-            while (true)
-            {
+            //while (TutorialManager.Instance.finishedIntro < 3)
+            ////while (true)
+            //{
+            Debug.Log("In move particle system");
                 targetPosition = Random.insideUnitSphere * 0.7f + originPosition;
                 //smaller bounding area, and sphere, sinusoidal
                 //Vector3 targetPosition = new Vector3(
@@ -64,79 +66,70 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
                     yield return null;
                 }
 
-                //lean tween- sinousoidal
-                //float elapsedTime = 0f;
-                //while (elapsedTime < moveDuration)
-                //{
+            //lean tween- sinousoidal
+            //float elapsedTime = 0f;
+            //while (elapsedTime < moveDuration)
+            //{
 
-                //    float t = elapsedTime / moveDuration;
-                //    newPosition = Vector3.Lerp(currentPosition, targetPosition, t);
+            //    float t = elapsedTime / moveDuration;
+            //    newPosition = Vector3.Lerp(currentPosition, targetPosition, t);
 
-                //    //LeanTween.move(particleSystem, newPosition, moveDuration).setEase(LeanTweenType.easeOutElastic).setDelay(0f);
-                //    LeanTween.move(particleSystem, newPosition, 0f).setEase(LeanTweenType.easeIOutSine).setDelay(0f);
-                //    //LeanTween.move(gameObject, targetPosition, moveDuration)
-                //    //.setEase(LeanTweenType.easeInOutSine)
-                //    //.setOnUpdate((float t) =>
-                //    //{
-                //    //    // Calculate the position along the sine wave
-                //    //    float sineOffset = Mathf.Sin(t * Mathf.PI) * amplitude;
-                //    //    newPosition = Vector3.Lerp(currentPosition, targetPosition, t);
-                //    //    newPosition.x += sineOffset;  // Modify X position with the sine wave
-                //    //    newPosition.z += sineOffset;
-                //    //    transform.position = newPosition;
-                //    //});
+            //    //LeanTween.move(particleSystem, newPosition, moveDuration).setEase(LeanTweenType.easeOutElastic).setDelay(0f);
+            //    LeanTween.move(particleSystem, newPosition, 0f).setEase(LeanTweenType.easeIOutSine).setDelay(0f);
+            //    //LeanTween.move(gameObject, targetPosition, moveDuration)
+            //    //.setEase(LeanTweenType.easeInOutSine)
+            //    //.setOnUpdate((float t) =>
+            //    //{
+            //    //    // Calculate the position along the sine wave
+            //    //    float sineOffset = Mathf.Sin(t * Mathf.PI) * amplitude;
+            //    //    newPosition = Vector3.Lerp(currentPosition, targetPosition, t);
+            //    //    newPosition.x += sineOffset;  // Modify X position with the sine wave
+            //    //    newPosition.z += sineOffset;
+            //    //    transform.position = newPosition;
+            //    //});
 
-                //    elapsedTime += Time.deltaTime;
-                //    currentPosition = this.transform.position;
-                //    //this.transform.position = Vector3.Lerp(this.transform.position, originPosition, t);
-                //    yield return null;
-                //}
+            //    elapsedTime += Time.deltaTime;
+            //    currentPosition = this.transform.position;
+            //    //this.transform.position = Vector3.Lerp(this.transform.position, originPosition, t);
+            //    yield return null;
+            //}
 
-                //sinusoidal interpolation
-                //float elapsedTime = 0f;
-                //while (elapsedTime < moveDuration)
-                //{
-                //    elapsedTime += Time.deltaTime;
-                //    //var yOffset = new Vector3(0, Mathf.Sin(Time.time * ySpeed) * yAmplitude + yAmplitude, 0);
+            //sinusoidal interpolation
+            //float elapsedTime = 0f;
+            //while (elapsedTime < moveDuration)
+            //{
+            //    elapsedTime += Time.deltaTime;
+            //    //var yOffset = new Vector3(0, Mathf.Sin(Time.time * ySpeed) * yAmplitude + yAmplitude, 0);
 
-                //    this.transform.position = Vector3.Lerp(currentPosition, targetPosition, Mathf.Sin(elapsedTime * moveSpeed) * amplitude + amplitudeOffset);
-                //    currentPosition = this.transform.position;
-                //    yield return null;
-                //}
-
-
-                //float elapsedTime = 0f;
-                //while (elapsedTime < moveDuration)
-                //{
-                //    float t = elapsedTime / moveDuration;
-
-                //    // Calculate the sine wave motion using Mathf.Sin
-                //    float waveFactor = Mathf.Sin(t * 1.5f) * amplitude;
-
-                //    // Apply the wave factor to the position
-                //    Vector3 wavePosition = Vector3.Lerp(currentPosition, targetPosition, t);
-                //    wavePosition.z += waveFactor;
-                //    this.transform.position = wavePosition;
-
-                //    elapsedTime += Time.deltaTime;
-                //    currentPosition = this.transform.position;
-
-                //    yield return null;
-                //}
+            //    this.transform.position = Vector3.Lerp(currentPosition, targetPosition, Mathf.Sin(elapsedTime * moveSpeed) * amplitude + amplitudeOffset);
+            //    currentPosition = this.transform.position;
+            //    yield return null;
+            //}
 
 
+            //float elapsedTime = 0f;
+            //while (elapsedTime < moveDuration)
+            //{
+            //    float t = elapsedTime / moveDuration;
 
-                //yield return new WaitForSeconds(moveDuration);
-            }
-        }
+            //    // Calculate the sine wave motion using Mathf.Sin
+            //    float waveFactor = Mathf.Sin(t * 1.5f) * amplitude;
 
-        // Update is called once per frame
-        void Update()
-        {
-            //transform.position = originPosition;
-            //transform.position = Random.insideUnitSphere * 0.2f;
-            //Mathf.PerlinNoise(transform.position.x, transform.position.y);
+            //    // Apply the wave factor to the position
+            //    Vector3 wavePosition = Vector3.Lerp(currentPosition, targetPosition, t);
+            //    wavePosition.z += waveFactor;
+            //    this.transform.position = wavePosition;
 
+            //    elapsedTime += Time.deltaTime;
+            //    currentPosition = this.transform.position;
+
+            //    yield return null;
+            //}
+
+
+
+            yield return new WaitForSeconds(moveDuration);
+            //}
         }
     }
 }

@@ -16,7 +16,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         //[SerializeField]
         //private Transform user;
         //[SerializeField]
-        //private Transform introMarker;
+        GameObject introMarker;
         //[SerializeField]
         //private Transform vizMarker;
 
@@ -26,7 +26,8 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             ////user = GameObject.FindWithTag("User");
             //user = GameObject.FindWithTag("MainCamera");
 
-            //introMarker = GameObject.FindWithTag("IntroNavMarker");
+            introMarker = GameObject.FindWithTag("IntroNavMarker");
+            OnTriggerEnter(introMarker.GetComponent<Collider>());
             //vizMarker = GameObject.FindWithTag("VizNavMarker");
             //userPosition = new Vector2(user.transform.position.x, user.transform.position.z);
             //introPosition = new Vector2(introMarker.transform.position.x, introMarker.transform.position.z);
