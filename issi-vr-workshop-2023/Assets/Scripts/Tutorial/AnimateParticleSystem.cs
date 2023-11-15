@@ -9,8 +9,8 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
     /// </summary>
     public class AnimateParticleSystem : MonoBehaviour
     {
-        [SerializeField]
-        public GameObject particleSystem;
+        //[SerializeField]
+        //public GameObject particleSystem;
         public float moveSpeed= 2;
         Vector3 originPosition;
         Vector3 currentPosition;
@@ -21,31 +21,41 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         public float amplitude = 20f;
         public float amplitudeOffset = 15f;
 
+        void Awake()
+        {
+            Debug.Log("In Awake(), idleAnim= " + TutorialManager.Instance.idleAnim);
+            StartCoroutine(MoveParticleSystem());
+        }
+
         // Start is called before the first frame update
         void Start()
         {
+            Debug.Log("In Start(), idleAnim= " + TutorialManager.Instance.idleAnim);
             originPosition = currentPosition = this.transform.position;
             //newPosition = Random.insideUnitSphere * 0.5f;
             //newPosition = Vector3.Lerp(originPosition, originPosition + Random.insideUnitSphere * 2, 0.5f);
-            //StartCoroutine(MoveParticleSystem());
+            StartCoroutine(MoveParticleSystem());
             //Debug.Log("Origin Position" + originPosition);
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (TutorialManager.Instance.finishedIntro < 3)
+            if (TutorialManager.Instance.animTrigger == true)
+            ////if (TutorialManager.Instance.finishedIntro < 3)
             {
+                Debug.Log("In Anim Update");
                 StartCoroutine(MoveParticleSystem());
+                TutorialManager.Instance.animTrigger = false;
             }
         }
 
         IEnumerator MoveParticleSystem()
         {
-            //while (TutorialManager.Instance.finishedIntro < 3)
+            while (TutorialManager.Instance.idleAnim == true)
             ////while (true)
-            //{
-            Debug.Log("In move particle system");
+            {
+                Debug.Log("In move particle system");
                 targetPosition = Random.insideUnitSphere * 0.7f + originPosition;
                 //smaller bounding area, and sphere, sinusoidal
                 //Vector3 targetPosition = new Vector3(
@@ -129,7 +139,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
 
 
             yield return new WaitForSeconds(moveDuration);
-            //}
+            }
         }
     }
 }

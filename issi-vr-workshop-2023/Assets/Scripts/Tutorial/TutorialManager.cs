@@ -17,6 +17,9 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         public int finishedViz = 0;
         public string chapPlaying;
         public bool replay = false;
+        public bool idleAnim = true;
+        public bool animTrigger = true;
+
         //public GameObject user;
         //public Vector2 userPosition;
 
@@ -66,7 +69,17 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
                         yield return null;
                     }
 
-                    
+                    //if intro is playing, inc intro count, same for viz
+                    if (chapPlaying == "intro" && finishedIntro < 3)
+                    {
+                        finishedIntro += 1;
+                        Debug.Log("Finished a chapter, Increment finishedIntro, = " + finishedIntro);
+                    }
+                    if (chapPlaying == "viz" && finishedViz < 2)
+                    {
+                        finishedViz += 1;
+                        Debug.Log("Finished a chapter, Increment finishedviz, = " + finishedViz);
+                    }
 
                 }
             }
@@ -76,17 +89,17 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
                 {
                     yield return null;
                 }
-                //if intro is playing, inc intro count, same for viz
-                if (chapPlaying == "intro" && finishedIntro < 3)
-                {
-                    finishedIntro += 1;
-                    Debug.Log("Increment finishedIntro, = " + finishedIntro);
-                }
-                if (chapPlaying == "viz" && finishedViz < 2)
-                {
-                    finishedViz += 1;
-                    Debug.Log("Increment finishedviz, = " + finishedViz);
-                }
+                ////if intro is playing, inc intro count, same for viz
+                //if (chapPlaying == "intro" && finishedIntro < 3)
+                //{
+                //    finishedIntro += 1;
+                //    Debug.Log("Increment finishedIntro, = " + finishedIntro);
+                //}
+                //if (chapPlaying == "viz" && finishedViz < 2)
+                //{
+                //    finishedViz += 1;
+                //    Debug.Log("Increment finishedviz, = " + finishedViz);
+                //}
                 StartCoroutine(playAudioSequentially(audioClips));
             }
 

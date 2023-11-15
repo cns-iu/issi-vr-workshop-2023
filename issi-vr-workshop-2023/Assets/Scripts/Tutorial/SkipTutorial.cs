@@ -48,14 +48,14 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             if (TutorialManager.Instance.audioSource.isActiveAndEnabled)
             {
                 TutorialManager.Instance.audioSource.Stop();
-                if(TutorialManager.Instance.chapPlaying == "intro")
-                {
-                    TutorialManager.Instance.finishedIntro += 1;
-                }
-                else if (TutorialManager.Instance.chapPlaying == "viz")
-                {
-                    TutorialManager.Instance.finishedViz += 1;
-                }
+                //if(TutorialManager.Instance.chapPlaying == "intro")
+                //{
+                //    TutorialManager.Instance.finishedIntro += 1;
+                //}
+                //else if (TutorialManager.Instance.chapPlaying == "viz")
+                //{
+                //    TutorialManager.Instance.finishedViz += 1;
+                //}
                 Debug.Log("Skip Chapter, intro: " + TutorialManager.Instance.finishedIntro + " viz: " + TutorialManager.Instance.finishedViz);
             }
         }
