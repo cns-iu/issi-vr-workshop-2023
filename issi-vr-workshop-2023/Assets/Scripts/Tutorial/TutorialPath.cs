@@ -17,6 +17,8 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         public Vector3[] path2;
         LTBezierPath tutorialPath;
         Vector3 originPosition;
+        public GameObject IntroNavMarker;
+        public GameObject VizNavMarker;
 
         public GameObject particleSystem;
         private GameObject tutorialGuide;
@@ -25,6 +27,8 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         // Start is called before the first frame update
         void Start()
         {
+            IntroNavMarker = GameObject.Find("IntroNavMarker");
+            VizNavMarker = GameObject.Find("VisualizationNavMarker");
             tutorialGuide = GameObject.Find("TutorialGuide");
             particleSystem = GameObject.Find("Particle System");
             originPosition = particleSystem.transform.position;
@@ -91,11 +95,28 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             //tutorialPath = new LTBezierPath(path2);
             //LeanTween.move(tutorialGuide, tutorialPath.pts, 20f).setEase(LeanTweenType.easeInOutSine).setOrientToPath(true).setDelay(24f);
 
-
+            //creates a Vector3 array of waypoints for the tutorial guide
             path = new Vector3[] { tutorialGuide.transform.position, pathTransform[1].position, pathTransform[2].position, pathTransform[3].position, pathTransform[3].position, pathTransform[4].position, pathTransform[5].position, pathTransform[6].position, pathTransform[6].position, pathTransform[7].position, pathTransform[8].position, pathTransform[9].position };
 
+            //creates a LeanTween Bezier Path based on the array of waypoints
             tutorialPath = new LTBezierPath(path);
+
+            //tweens between 
             LeanTween.move(tutorialGuide, tutorialPath.pts, 30f).setEase(LeanTweenType.easeInOutSine).setOrientToPath(true).setDelay(3f);
+
+
+            ////creates a Vector3 array of waypoints for the tutorial guide
+            //path = new Vector3[] { tutorialGuide.transform.position, pathTransform[1].position, 
+            //    pathTransform[2].position, pathTransform[3].position, pathTransform[3].position, 
+            //    pathTransform[4].position, pathTransform[5].position, pathTransform[6].position,
+            //    pathTransform[6].position, pathTransform[7].position, pathTransform[8].position, 
+            //    pathTransform[9].position };
+
+            ////creates a LeanTween Bezier Path based on the array of waypoints
+            //tutorialPath = new LTBezierPath(path);
+
+            ////moves the tutorial guide along the path 
+            //LeanTween.move(tutorialGuide, tutorialPath.pts, 30f).setOrientToPath(true).setDelay(3f);
 
 
             yield return new WaitForSeconds(34f);
@@ -120,6 +141,14 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             TutorialManager.Instance.idleAnim = true;
             TutorialManager.Instance.animTrigger = true;
             tutorialGuide.transform.Rotate(0f, 30f, 0f);
+            if (IntroNavMarker.GetComponent<Collider>().enabled == false)
+            {
+                IntroNavMarker.GetComponent<Collider>().enabled = true;
+            }
+            if (VizNavMarker.GetComponent<Collider>().enabled == false)
+            {
+                VizNavMarker.GetComponent<Collider>().enabled = true;
+            }
 
         }
 

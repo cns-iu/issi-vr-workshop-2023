@@ -20,6 +20,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         public bool idleAnim = true;
         public bool animTrigger = true;
 
+
         //public GameObject user;
         //public Vector2 userPosition;
 

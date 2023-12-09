@@ -49,7 +49,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         }
 
 
-        void OnTriggerEnter(Collider colliderObj) 
+        void OnTriggerEnter(Collider colliderObj)
         {
             Debug.Log("In Trigger method");
             if (colliderObj.CompareTag("IntroNavMarker"))
@@ -63,6 +63,23 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
                 colliderObj.enabled = false;
             }
         }
+
+
+        //void OnTriggerEnter(Collider colliderObj)
+        //{
+        //    //checks if the user is on the Introduction Marker, plays Intro Chapters
+        //    if (colliderObj.CompareTag("IntroNavMarker"))
+        //    {
+        //        TutorialManager.Instance.ChooseAudio("IntroNavMarker");
+        //        colliderObj.enabled = false;
+        //    }
+        //    //checks if user is on the Visualization Marker, plays Visualization Chapters
+        //    else if (colliderObj.CompareTag("VizNavMarker"))
+        //    {
+        //        TutorialManager.Instance.ChooseAudio("VizNavMarker");
+        //        colliderObj.enabled = false;
+        //    }
+        //}
 
         //private void ProximityChecker()
         //{
