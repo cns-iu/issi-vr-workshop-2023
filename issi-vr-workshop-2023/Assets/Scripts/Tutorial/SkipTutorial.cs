@@ -18,6 +18,8 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         public AudioClip feedbackOnClick;
         public TMP_Text displayChapter; 
         public TMP_Dropdown chapterDropdown;
+        private string chapterSelected;
+        public bool isMuted;
 
         // Start is called before the first frame update
         void Start()
@@ -43,7 +45,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             if(TutorialManager.Instance.audioSource.isPlaying == true)
             {
                 string chapterName = StringTrimEnd(TutorialManager.Instance.audioSource.clip.ToString(), "(UnityEngine.AudioClip)");
-                Debug.Log("Now Playing:" + chapterName);
+                //Debug.Log("Now Playing:" + chapterName);
                 if (chapterName.StartsWith("Chapter") == true)
                 {
                     chapterName = chapterName.Insert(9, ":");
@@ -74,6 +76,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             {
                 Debug.Log("Skipped all viz, Setting Audio inactive");
 
+                // Use tutorial path conditions here so that when the guide prepares to moves, it will say follow me and then audio set to inactive and then move.
 
                 if (TutorialManager.Instance.chapPlaying == "intro")
                 {
@@ -93,6 +96,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             if (TutorialManager.Instance.audioSource.isActiveAndEnabled)
             {
                 TutorialManager.Instance.audioSource.Stop();
+                //If I skip to end when second chapter is playing/ right after intro is played, follow me is not working. Fix it here!
                 if (TutorialManager.Instance.chapPlaying == "intro" && TutorialManager.Instance.finishedIntro == 2)
                 {
                     //TutorialManager.Instance.finishedIntro += 1;
@@ -157,9 +161,12 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
 
         public void PlayFeedbackOnClick()
         {
-            //Royalty Free Audio from Pixaby: https://pixabay.com/sound-effects/interface-124464/
-            audioSource.clip = feedbackOnClick;
-            audioSource.Play();
+            if(isMuted == false)
+            {
+                //Royalty Free Audio from Pixaby: https://pixabay.com/sound-effects/interface-124464/
+                audioSource.clip = feedbackOnClick;
+                audioSource.Play();
+            }
         }
 
         public void ReplayTutorial()
@@ -200,9 +207,133 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
 
         public void SelectChapter()
         {
-            Debug.Log("Chpater Selected: "+chapterDropdown.options[chapterDropdown.value].text);
+            Debug.Log("Chapter Selected: " + chapterDropdown.options[chapterDropdown.value].text);
+            chapterSelected = chapterDropdown.options[chapterDropdown.value].text;
+            TutorialManager.Instance.audioSource.enabled = true;
+            //if tutorial audio is inactive, set it to active. if it is active, make it inactive and active again.
+            if (TutorialAudio.activeSelf == false)
+            {
+                TutorialAudio.SetActive(true);
+            }
+            else if(TutorialAudio.activeSelf == true)
+            {
+                TutorialAudio.SetActive(false);
+                TutorialAudio.SetActive(true);
+            }
+
+            TutorialManager.Instance.audioSource.Stop();
+            //TutorialAudio.SetActive(false); 
+            //TutorialAudio.SetActive(true);
+            switch (chapterSelected)
+            {
+                case "Introduction":
+                    //Insert conditions from tutorial path so that when guide is near viz, it will go to intro and play the first three chapters once again? Also, should the guide only play the selected chapter or all the chapters that come after it?
+                    //TutorialManager.Instance.audioSource.Stop();
+                    //if (TutorialManager.Instance.finishedViz <= 2 && TutorialManager.Instance.finishedIntro == 0 && TutorialManager.Instance.chapPlaying == "viz")
+                    //{
+                    //    Tutorial
+                    //}
+                        TutorialManager.Instance.finishedIntro = 0;
+                        Debug.Log("Introduction Selected, finishedIntro: " + TutorialManager.Instance.finishedIntro);
+                        StartCoroutine(TutorialManager.Instance.playAudioSequentially(TutorialManager.Instance.introChapters[0..]));
+ 
+                    break;
+
+                case "Chapter 1: The Data":
+                    //TutorialManager.Instance.audioSource.Stop();
+                    TutorialManager.Instance.finishedIntro = 1;
+                    Debug.Log("Chapter 1 Selected, finishedIntro: " + TutorialManager.Instance.finishedIntro);
+                    StartCoroutine(TutorialManager.Instance.playAudioSequentially(TutorialManager.Instance.introChapters[1..]));
+                    break;
+
+                case "Chapter 2: Controls Part 1":
+                    //TutorialManager.Instance.audioSource.Stop();
+                    TutorialManager.Instance.finishedIntro = 2;
+                    Debug.Log("Chapter 2 Selected, finishedIntro: " + TutorialManager.Instance.finishedIntro);
+                    StartCoroutine(TutorialManager.Instance.playAudioSequentially(TutorialManager.Instance.introChapters[2..]));
+                    break;
+
+                case "Chapter 3: The Visualization":
+                    //insert condition that will check what the last played chapter is. if it is intro, Intro to Viz. else, don't use tut path.
+                    VizNavMarker.GetComponent<Collider>().enabled = false;
+                    TutorialManager.Instance.audioSource.Stop();
+                    TutorialManager.Instance.finishedViz = 0;
+                    Debug.Log("Chapter 3 Selected, finishedViz: " + TutorialManager.Instance.finishedViz);
+                    if (TutorialManager.Instance.chapPlaying == "intro")
+                    {
+                        TutorialManager.Instance.finishedIntro = 3;
+                        TutorialManager.Instance.finishedViz = 0;
+                        StartCoroutine(PlayFollowMe());
+                        StartCoroutine(WaitUntilViz(TutorialManager.Instance.vizChapters[0..]));
+                        Debug.Log("Chap Playing Switch: " + TutorialManager.Instance.chapPlaying);
+                        //StartCoroutine(TutorialManager.Instance.playAudioSequentially(TutorialManager.Instance.vizChapters[0..]));
+                    }
+                    else if(TutorialManager.Instance.chapPlaying == "viz")
+                    {
+                        TutorialManager.Instance.finishedViz = 0;
+                        Debug.Log("Else if: chapPlaying: " + TutorialManager.Instance.chapPlaying + "  finishedViz: " + TutorialManager.Instance.finishedViz);
+                        StartCoroutine(TutorialManager.Instance.playAudioSequentially(TutorialManager.Instance.vizChapters[0..]));
+                    }
+                    //TutorialManager.Instance.finishedIntro = 3;
+                    //TutorialManager.Instance.finishedViz = 0;
+                    //TutorialManager.Instance.chapPlaying = "intro";
+                    //StartCoroutine(PlayFollowMe());
+                    //StartCoroutine(TutorialManager.Instance.playAudioSequentially(TutorialManager.Instance.vizChapters[0..]));
+                    break;
+
+                case "Chapter 4: Controls Part 2":
+                    VizNavMarker.GetComponent<Collider>().enabled = false;
+                    TutorialManager.Instance.audioSource.Stop();
+                    TutorialManager.Instance.finishedViz = 1;
+                    if (TutorialManager.Instance.chapPlaying == "intro")
+                    {
+                        TutorialManager.Instance.finishedIntro = 3;
+                        TutorialManager.Instance.finishedViz = 1;
+                        StartCoroutine(PlayFollowMe());
+                        StartCoroutine(WaitUntilViz(TutorialManager.Instance.vizChapters[1..]));
+                        Debug.Log("Chap Playing Switch: " + TutorialManager.Instance.chapPlaying + " finishedViz: "+ TutorialManager.Instance.finishedViz);
+                        //StartCoroutine(TutorialManager.Instance.playAudioSequentially(TutorialManager.Instance.vizChapters[1..]));
+                    }
+                    else if (TutorialManager.Instance.chapPlaying == "viz")
+                    {
+                        TutorialManager.Instance.finishedViz = 1;
+                        Debug.Log("Else if: chapPlaying: " + TutorialManager.Instance.chapPlaying + "  finishedViz: " + TutorialManager.Instance.finishedViz);
+                        StartCoroutine(TutorialManager.Instance.playAudioSequentially(TutorialManager.Instance.vizChapters[1..]));
+                    }
+                    //TutorialManager.Instance.finishedIntro = 3;
+                    //TutorialManager.Instance.finishedViz = 1;
+                    //TutorialManager.Instance.chapPlaying = "intro";
+                    //Debug.Log("Chapter 4 Selected, finishedViz: " + TutorialManager.Instance.finishedViz);
+                    //StartCoroutine(PlayFollowMe());
+                    //StartCoroutine(TutorialManager.Instance.playAudioSequentially(TutorialManager.Instance.vizChapters[1..]));
+                    break;
+            }
+        }
+
+        IEnumerator WaitUntilViz(AudioClip[] chaptersToPlay)
+        {
+            yield return new WaitForSeconds(33f);
+            TutorialManager.Instance.chapPlaying = "viz";
+            StartCoroutine(TutorialManager.Instance.playAudioSequentially(chaptersToPlay));
+            Debug.Log("WaitUntilViz: chapPlaying: " + TutorialManager.Instance.chapPlaying + "  finishedViz: "+ TutorialManager.Instance.finishedViz);
+        }
+
+        public void MuteUnmuteFeedback()
+        {
+            if(isMuted == false)
+            {
+                isMuted = true;
+            }
+            else
+            {
+                isMuted = false;
+            }
         }
 
     }
 }
 
+//To Do Next: 
+// - drop down options should link to the corresponding audio. if user selects a chapter and it ends, the next chapter should automatically play. If chapters in that set(intro or viz) are over, what happens normally without the dropdown should happen. MAIN TASK: after selected chapter is over, the next chapter should play.
+// - integrate chapter name display with chapter drop down??
+// - add sound when clicking drop down

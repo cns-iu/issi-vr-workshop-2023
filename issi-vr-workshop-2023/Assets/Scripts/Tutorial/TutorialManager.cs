@@ -52,7 +52,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             //Debug.Log("User Position" + userPosition);
         }
 
-        IEnumerator playAudioSequentially(AudioClip[] audioClips)
+        public IEnumerator playAudioSequentially(AudioClip[] audioClips)
         {
             Debug.Log("Playing Audio, finishedIntro: " + finishedIntro + " finishedViz: "+ finishedViz);
             yield return null;
