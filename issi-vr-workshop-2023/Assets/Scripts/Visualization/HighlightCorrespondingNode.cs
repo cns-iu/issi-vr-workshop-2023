@@ -23,7 +23,7 @@ namespace AndreasBueckle.Assets.Scripts.Visualization
         }
 
         /// <summary>
-        /// A function to activate the Outline components in bith the brushed and the linked node.
+        /// A function to activate the Outline components in both the brushed and the linked node.
         /// </summary>
         /// <param name="args">arguments that need to be taken to match signature of delegate for hover enter event</param>
         void SetHighlights(HoverEnterEventArgs args)

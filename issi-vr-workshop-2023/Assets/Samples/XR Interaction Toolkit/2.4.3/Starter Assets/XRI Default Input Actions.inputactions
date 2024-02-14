@@ -2197,6 +2197,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Custom",
+            "id": "f344c029-2afb-48d3-af00-90f240cbd745",
+            "actions": [
+                {
+                    "name": "SwitchUI",
+                    "type": "Button",
+                    "id": "f548f3df-b8f6-4216-bbac-f535c86b1f67",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "18d82200-c91a-4be7-bc0d-2616e9ab50ac",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

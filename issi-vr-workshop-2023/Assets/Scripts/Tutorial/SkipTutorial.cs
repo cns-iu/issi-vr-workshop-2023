@@ -21,6 +21,8 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         private string chapterSelected;
         public bool isMuted;
 
+        public GameObject slideShow;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -38,58 +40,59 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             }
             return input;
         }
-        void Update()
-        {
+        
+        //void Update()
+        //{
 
-            //Debug.Log("Chapter Playing Now is:"+ TutorialManager.Instance.audioSource.clip.ToString());
-            if(TutorialManager.Instance.audioSource.isPlaying == true)
-            {
-                string chapterName = StringTrimEnd(TutorialManager.Instance.audioSource.clip.ToString(), "(UnityEngine.AudioClip)");
-                //Debug.Log("Now Playing:" + chapterName);
-                if (chapterName.StartsWith("Chapter") == true)
-                {
-                    chapterName = chapterName.Insert(9, ":");
-                }
-                displayChapter.SetText(chapterName);
-            }
-            else
-            {
-                displayChapter.SetText("");
-            }
+        //    //Debug.Log("Chapter Playing Now is:"+ TutorialManager.Instance.audioSource.clip.ToString());
+        //    if(TutorialManager.Instance.audioSource.isPlaying == true)
+        //    {
+        //        string chapterName = StringTrimEnd(TutorialManager.Instance.audioSource.clip.ToString(), "(UnityEngine.AudioClip)");
+        //        //Debug.Log("Now Playing:" + chapterName);
+        //        if (chapterName.StartsWith("Chapter") == true)
+        //        {
+        //            chapterName = chapterName.Insert(9, ":");
+        //        }
+        //        displayChapter.SetText(chapterName);
+        //    }
+        //    else
+        //    {
+        //        displayChapter.SetText("");
+        //    }
 
-            //if (TutorialManager.Instance.finishedViz == 2)
-            //{
-            //    //if(TutorialAudio.activeSelf == true && TutorialManager.Instance.replay == false)
-            //    if (TutorialAudio.activeSelf == true)
-            //    {
-            //        Debug.Log("Skipped all viz, Setting Audio inactive");
-            //        TutorialAudio.SetActive(false);
-            //    }
-            //    //if (TutorialAudio.activeSelf == false && TutorialManager.Instance.replay == true)
-            //    //{
-            //    //    Debug.Log("Should REPLAY");
-            //    //    TutorialAudio.SetActive(true);
-            //    //}
-            //}
+        //    //if (TutorialManager.Instance.finishedViz == 2)
+        //    //{
+        //    //    //if(TutorialAudio.activeSelf == true && TutorialManager.Instance.replay == false)
+        //    //    if (TutorialAudio.activeSelf == true)
+        //    //    {
+        //    //        Debug.Log("Skipped all viz, Setting Audio inactive");
+        //    //        TutorialAudio.SetActive(false);
+        //    //    }
+        //    //    //if (TutorialAudio.activeSelf == false && TutorialManager.Instance.replay == true)
+        //    //    //{
+        //    //    //    Debug.Log("Should REPLAY");
+        //    //    //    TutorialAudio.SetActive(true);
+        //    //    //}
+        //    //}
 
-            if(TutorialManager.Instance.finishedViz == 2 && TutorialAudio.activeSelf == true)
-            {
-                Debug.Log("Skipped all viz, Setting Audio inactive");
+        //    if(TutorialManager.Instance.finishedViz == 2 && TutorialAudio.activeSelf == true)
+        //    {
+        //        Debug.Log("Skipped all viz, Setting Audio inactive");
 
-                // Use tutorial path conditions here so that when the guide prepares to moves, it will say follow me and then audio set to inactive and then move.
+        //        // Use tutorial path conditions here so that when the guide prepares to moves, it will say follow me and then audio set to inactive and then move.
 
-                if (TutorialManager.Instance.chapPlaying == "intro")
-                {
-                    StartCoroutine(PlayFollowMe());
-                }
+        //        if (TutorialManager.Instance.chapPlaying == "intro")
+        //        {
+        //            StartCoroutine(PlayFollowMe());
+        //        }
 
-                TutorialAudio.SetActive(false);
-            }
-            if(TutorialManager.Instance.finishedIntro == 3 && TutorialManager.Instance.chapPlaying == "intro")
-            {
-                StartCoroutine(PlayFollowMe());
-            }
-        }
+        //        TutorialAudio.SetActive(false);
+        //    }
+        //    if(TutorialManager.Instance.finishedIntro == 3 && TutorialManager.Instance.chapPlaying == "intro")
+        //    {
+        //        StartCoroutine(PlayFollowMe());
+        //    }
+        //}
 
         public void SkipChapter()
         {
@@ -330,10 +333,22 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             }
         }
 
+        public void CloseTutorial()
+        {
+            if(slideShow.activeSelf == true)
+            {
+                slideShow.SetActive(false);
+            }
+        }
+
+        public void OpenTutorial()
+        {
+            if (slideShow.activeSelf == false)
+            {
+                slideShow.SetActive(true);
+
+            }
+        }
+
     }
 }
-
-//To Do Next: 
-// - drop down options should link to the corresponding audio. if user selects a chapter and it ends, the next chapter should automatically play. If chapters in that set(intro or viz) are over, what happens normally without the dropdown should happen. MAIN TASK: after selected chapter is over, the next chapter should play.
-// - integrate chapter name display with chapter drop down??
-// - add sound when clicking drop down
