@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 namespace AndreasBueckle.Assets.Scripts.Tutorial
 {
+    /// <summary>
+    /// A class to manage the tutorial slide show
+    /// </summary>
     public class SlideShow : MonoBehaviour
     {
-        public Sprite[] slides;
         public List<GameObject> panels;
         //public Image slideImage;
         public Button nextSlide;
@@ -17,10 +19,11 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         // Start is called before the first frame update
         void Start()
         {
-            //slideImage.sprite = slides[0];
             currentSlide = 0;
             nextSlide = GameObject.Find("NextSlide").GetComponent<Button>();
             prevSlide = GameObject.Find("PrevSlide").GetComponent<Button>();
+
+            //disabling all other slides except the first one
             panels[0].SetActive(true);
             for(int i = 1; i < panels.Count; i++)
             {
@@ -31,6 +34,7 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
         // Update is called once per frame
         void Update() 
         {
+            //disabling prev/next slide arrow based on the index of slide being displayed
             if(currentSlide == 0)
             {
                 prevSlide.gameObject.SetActive(false);
@@ -43,7 +47,6 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
                 }
             }
             if(currentSlide == panels.Count - 1)
-            //if(currentSlide == slides.Length - 1)
                 {
                 nextSlide.gameObject.SetActive(false);
             }
@@ -63,46 +66,38 @@ namespace AndreasBueckle.Assets.Scripts.Tutorial
             //}
         }
 
+
+        /// <summary>
+        /// Disabling the current slide, enabling the nect slide in the list when next button is pressed.
+        /// </summary>
         public void NextSlide()
         {
             if( currentSlide < panels.Count)
-            //if( currentSlide < slides.Length)
             {
                 currentSlide += 1;
-                //slideImage.sprite = slides[currentSlide];
                 panels[currentSlide].SetActive(true);
-                //Debug.Log("Displaying Panel"+ panels[currentSlide].name);
-                //Debug.Log("Current Slide" + currentSlide);
                 for (int i = 0; i < panels.Count && i != currentSlide; i++)
                 {
-                    //Debug.Log("In next slide inactive");
                     panels[i].SetActive(false);
                 }
             }
         }
 
+        /// <summary>
+        /// Disabling the current slide, enabling the prev slide in the list when previous button is pressed
+        /// </summary>
         public void PrevSlide()
         {
-            //for (int i = 0; i < panels.Count && i != currentSlide; i++)
-            //{
-            //    panels[i].SetActive(false);
-            //}
             if (currentSlide > 0)
             {
                 currentSlide -= 1;
-                //slideImage.sprite = slides[currentSlide];
-                
                 panels[currentSlide].SetActive(true);
-                //Debug.Log("Displaying Panel" + panels[currentSlide].name); 
-                //Debug.Log("Prev SLide" + panels.Count + " " + currentSlide);
                 for (int i = 0; i < panels.Count; i++)
                 {
-                    //Debug.Log("Debug: " + i);
                     if( i == currentSlide)
                     {
                         continue;
                     }
-                    //Debug.Log("in prev slide inactive");
                     panels[i].SetActive(false);
                 }
             }
