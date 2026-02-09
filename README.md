@@ -16,8 +16,7 @@ More information about the workshop of at ISSI 2023 can be found at [https://cns
 
 ## Video Demo
 
-A video demo is available on [Youtube]() and embedded below:
-<iframe width="560" height="315" src="https://www.youtube.com/embed/x_RaPMxPbyM?si=cqMatyfEiup1QBeZ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+A video demo is available on [Youtube](https://youtu.be/x_RaPMxPbyM?si=W59abyNk6G6Cs7Lh).
 
 
 ## Main
